@@ -1,33 +1,45 @@
 const path = require('path');
+
+// Plugins
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const ImageMinimizerPlugin = require('image-minimizer-webpack-plugin');
 
+// Module
 module.exports = {
-  entry: './src/index.js',
+  mode: 'development',
+  entry: './src/index.tsx',
   output: {
-    filename: 'main.js',
     path: path.resolve(__dirname, 'dist'),
+    filename: 'bundle.js',
   },
   module: {
     rules: [
-      // js
+      // TypeScript
+      {
+        test: /\.tsx?$/,
+        use: 'ts-loader',
+        exclude: /node_modules/,
+      },
+      // JavaScript
       {
         test: /\.m?js$/,
-        exclude: /node_modules/,
         use: {
-          loader: "babel-loader",
+          loader: 'babel-loader',
           options: {
-            presets: ["@babel/preset-env", "@babel/preset-react"]
+            presets: ['@babel/preset-env', '@babel/preset-react']
           }
-        }
+        },
+        exclude: /node_modules/,
       },
 
-      // css
+      // Style
       {
         test: /\.css$/i,
         use: ['style-loader', 'css-loader'],
       },
 
-      // image
+      // Image
       {
         test: /\.(jpe?g|png|gif|svg)$/i,
         use: [
@@ -38,7 +50,23 @@ module.exports = {
       },
     ]
   },
+  resolve: {
+    // options for resolving module requests (does not apply to resolving of loaders)
+    extensions: [ '.tsx', '.ts', '.js' ],
+  },
+  devtool: 'inline-source-map',
+  devServer: {
+    contentBase: path.join(__dirname, 'dist'),
+    hot: true,
+    inline: true,
+    open: true,
+  },
   plugins: [
+    new CleanWebpackPlugin(),
+    new HtmlWebpackPlugin({
+      title: 'Ledger',
+      template: path.join(__dirname, 'public', 'index.html')
+    }),
     new ImageMinimizerPlugin({
       minimizerOptions: {
         // Lossless optimization with custom option
