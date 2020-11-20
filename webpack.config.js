@@ -1,16 +1,20 @@
+// Paths
 const path = require('path');
+const distPath = path.join(__dirname, 'dist');
+const publicPath = path.join(__dirname, 'public');
 
 // Plugins
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const ImageMinimizerPlugin = require('image-minimizer-webpack-plugin');
+const CopyPlugin = require("copy-webpack-plugin");
 
-// Module
+// Modules
 module.exports = {
   mode: 'development',
   entry: './src/index.tsx',
   output: {
-    path: path.resolve(__dirname, 'dist'),
+    path: distPath,
     filename: 'bundle.js',
   },
   module: {
@@ -32,21 +36,20 @@ module.exports = {
         },
         exclude: /node_modules/,
       },
-
       // Style
       {
-        test: /\.css$/i,
-        use: ['style-loader', 'css-loader'],
+        test: /\.s[ac]ss$/i,
+        use: [ "style-loader", "css-loader", "sass-loader"],
       },
-
       // Image
       {
         test: /\.(jpe?g|png|gif|svg)$/i,
-        use: [
-          {
-            loader: 'file-loader', // Or `url-loader` or your other loader
+        use: [{
+          loader: 'url-loader',
+          options: { 
+            limit: 8192 // bytes
           },
-        ],
+        }],
       },
     ]
   },
@@ -56,16 +59,25 @@ module.exports = {
   },
   devtool: 'inline-source-map',
   devServer: {
-    contentBase: path.join(__dirname, 'dist'),
+    contentBase: distPath,
     hot: true,
     inline: true,
-    open: true,
+    writeToDisk: true
   },
   plugins: [
     new CleanWebpackPlugin(),
     new HtmlWebpackPlugin({
       title: 'Ledger',
-      template: path.join(__dirname, 'public', 'index.html')
+      template: path.join(publicPath, 'index.html'),
+      favicon: path.join(publicPath, 'favicon.ico'),
+    }),
+    new CopyPlugin({
+      patterns: [
+        { from: path.join(publicPath, 'manifest.json'), to: distPath },
+        { from: path.join(publicPath, 'robots.txt'), to: distPath },
+        { from: path.join(publicPath, 'logo192.png'), to: distPath },
+        { from: path.join(publicPath, 'logo512.png'), to: distPath },
+      ],
     }),
     new ImageMinimizerPlugin({
       minimizerOptions: {
@@ -75,16 +87,7 @@ module.exports = {
           ['gifsicle', { interlaced: true }],
           ['mozjpeg', { progressive: true }],
           ['pngquant', { speed: 5 }],
-          [
-            'svgo',
-            {
-              plugins: [
-                {
-                  removeViewBox: false,
-                },
-              ],
-            },
-          ],
+          ['svgo', { plugins: [ { removeViewBox: false }]}],
         ],
       },
     }),
