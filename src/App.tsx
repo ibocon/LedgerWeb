@@ -1,3 +1,6 @@
+// react-hot-loader
+import { hot } from 'react-hot-loader/root';
+
 import React from 'react';
 import logo from './logo.svg';
 import './App.sass';
@@ -11,7 +14,7 @@ function App() {
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <p>
-          Edit <code>src/App.tsx</code> and save to reload.
+          Test <code>src/App.tsx</code> and save to reload.
         </p>
         <a
           className="App-link"
@@ -26,4 +29,4 @@ function App() {
   );
 }
 
-export default App;
+export default hot(App);

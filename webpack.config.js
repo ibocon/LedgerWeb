@@ -1,5 +1,6 @@
 // Paths
 const path = require('path');
+const srcPath = path.join(__dirname, 'src');
 const distPath = path.join(__dirname, 'dist');
 const publicPath = path.join(__dirname, 'public');
 
@@ -7,12 +8,17 @@ const publicPath = path.join(__dirname, 'public');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const ImageMinimizerPlugin = require('image-minimizer-webpack-plugin');
-const CopyPlugin = require("copy-webpack-plugin");
+const CopyPlugin = require('copy-webpack-plugin');
+const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
 
 // Modules
 module.exports = {
+  
+  // https://github.com/webpack/webpack-dev-server/issues/2758
+  target: 'web',
+
   mode: 'development',
-  entry: './src/index.tsx',
+  entry: ['react-hot-loader/patch', path.join(srcPath, 'index.tsx')],
   output: {
     path: distPath,
     filename: 'bundle.js',
@@ -21,25 +27,14 @@ module.exports = {
     rules: [
       // TypeScript
       {
-        test: /\.tsx?$/,
-        use: 'ts-loader',
+        test: /\.(j|t)sx?$/,
         exclude: /node_modules/,
-      },
-      // JavaScript
-      {
-        test: /\.m?js$/,
-        use: {
-          loader: 'babel-loader',
-          options: {
-            presets: ['@babel/preset-env', '@babel/preset-react']
-          }
-        },
-        exclude: /node_modules/,
+        use: ['babel-loader']
       },
       // Style
       {
         test: /\.s[ac]ss$/i,
-        use: [ "style-loader", "css-loader", "sass-loader"],
+        use: [ 'style-loader', 'css-loader', 'sass-loader'],
       },
       // Image
       {
@@ -55,11 +50,15 @@ module.exports = {
   },
   resolve: {
     // options for resolving module requests (does not apply to resolving of loaders)
-    extensions: [ '.tsx', '.ts', '.js' ],
+    extensions: [ '.tsx', '.ts', '.jsx', '.js' ],
+    alias: {
+      'react-dom': '@hot-loader/react-dom',
+    },
   },
   devtool: 'inline-source-map',
   devServer: {
     contentBase: distPath,
+    historyApiFallback: true,
     hot: true,
     inline: true,
     writeToDisk: true
@@ -91,5 +90,6 @@ module.exports = {
         ],
       },
     }),
+    new ForkTsCheckerWebpackPlugin(),
   ],
 };
