@@ -1,15 +1,13 @@
-// React
-import React from "react";
-import ReactDOM from "react-dom";
-import reportWebVitals from "./reportWebVitals";
-// Redux
-import { combineReducers, createStore } from "redux";
-import { Provider } from "react-redux";
-// Router
+// Modules
+import React from 'react';
+import ReactDOM from 'react-dom';
+import reportWebVitals from 'src/reportWebVitals';
+import { combineReducers, createStore } from 'redux';
+import { Provider } from 'react-redux';
 import { BrowserRouter as Router } from 'react-router-dom';
-// App
-import "./index.sass";
-import App from "./App";
+import App from 'src/App';
+// Styles
+import 'src/index.sass';
 
 interface ReduxState {}
 interface ReduxAction {}
@@ -34,7 +32,7 @@ ReactDOM.render(
       </Provider>
     </Router>
   </React.StrictMode>,
-  document.getElementById("root")
+  document.getElementById('root')
 );
 
 // If you want to start measuring performance in your app, pass a function
