@@ -1,9 +1,11 @@
 // Modules
 import React from 'react';
 import { Layout, Menu } from 'antd';
+
 // Styles
 import 'antd/dist/antd.css';
-import 'src/components/MySider.sass';
+import './MySider.sass';
+
 // Files
 import {
   UserOutlined,

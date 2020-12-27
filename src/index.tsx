@@ -1,36 +1,23 @@
 // Modules
 import React from 'react';
 import ReactDOM from 'react-dom';
-import reportWebVitals from 'src/reportWebVitals';
-import { combineReducers, createStore } from 'redux';
+import { reportWebVitals } from 'src/reportWebVitals';
 import { Provider } from 'react-redux';
-import { BrowserRouter as Router } from 'react-router-dom';
-import App from 'src/App';
+import { ConnectedRouter } from 'connected-react-router';
+
+import App from 'src/app/App';
+import { store, history } from 'src/store';
+
 // Styles
 import 'src/index.sass';
 
-interface ReduxState {}
-interface ReduxAction {}
-const initialState: ReduxState = {};
-const reduxReducer = (
-  state = initialState,
-  action: ReduxAction
-): ReduxState => {
-  return state;
-};
-
-const rootReducer = combineReducers({
-  redux: reduxReducer,
-});
-const store = createStore(rootReducer);
-
 ReactDOM.render(
   <React.StrictMode>
-    <Router>
-      <Provider store={store}>
-        <App />
-      </Provider>
-    </Router>
+    <Provider store={store}>
+      <ConnectedRouter history={history}>
+          <App />
+      </ConnectedRouter>
+    </Provider>
   </React.StrictMode>,
   document.getElementById('root')
 );

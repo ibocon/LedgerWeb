@@ -2,11 +2,12 @@
 import { hot } from 'react-hot-loader/root';
 import React from 'react';
 import { Layout } from 'antd';
-import { MyHeader } from 'src/components/MyHeader';
-import { MySider } from 'src/components/MySider';
+import { MyHeader } from 'src/component/Header/MyHeader';
+import { MySider } from 'src/component/Sidebar/MySider';
+
 // Styles
 import 'antd/dist/antd.css';
-import 'src/App.sass';
+import './App.sass';
 
 const { Content } = Layout;
 
@@ -30,17 +31,18 @@ class App extends React.Component<Props, State> {
   render() {
     return (
       <Layout style={{ minHeight: '100vh' }}>
-        <MySider></MySider>
+        <MySider />
         <Layout className="site-layout">
-          <MyHeader></MyHeader>
+          <MyHeader />
           <Content
             className="site-layout-background"
             style={{
               margin: '24px 16px',
               padding: 24,
               minHeight: 280,
-            }}
-          >
+            }}>
+            <h1>Hello, World!</h1>
+            <p>Livereload</p>
           </Content>
         </Layout>
       </Layout>

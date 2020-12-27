@@ -1,9 +1,11 @@
 // Modules
 import React from 'react';
 import { Layout } from 'antd';
+
 // Styles
 import 'antd/dist/antd.css';
-import 'src/components/MyHeader.sass';
+import './MyHeader.sass';
+
 // Files
 import { MenuUnfoldOutlined, MenuFoldOutlined } from '@ant-design/icons';
 
