@@ -1,10 +1,11 @@
 // Modules
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { reportWebVitals } from 'src/reportWebVitals';
 import { Provider } from 'react-redux';
 import { ConnectedRouter } from 'connected-react-router';
 
+// Sources
+import { reportWebVitals } from 'src/reportWebVitals';
 import App from 'src/app/App';
 import { store, history } from 'src/store';
 
