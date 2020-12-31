@@ -9,7 +9,7 @@ import { getSidebarCollapsed, switchSidebarCollapsed } from 'src/feature/interfa
 
 // Styles
 import 'antd/dist/antd.css';
-import './Header.sass';
+import './index.sass';
 
 // Files
 import { MenuUnfoldOutlined, MenuFoldOutlined } from '@ant-design/icons';

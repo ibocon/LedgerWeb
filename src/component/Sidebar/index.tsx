@@ -9,7 +9,7 @@ import { getSidebarCollapsed } from 'src/feature/interface';
 
 // Styles
 import 'antd/dist/antd.css';
-import './Sider.sass';
+import './index.sass';
 
 // Files
 import {

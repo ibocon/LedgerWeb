@@ -4,8 +4,8 @@ import React from 'react';
 import { Layout } from 'antd';
 
 // Sources
-import { Header } from 'src/component/Header/Header';
-import { Sider } from 'src/component/Sidebar/Sider';
+import { Header } from 'src/component/Header';
+import { Sider } from 'src/component/Sidebar';
 
 // Styles
 import 'antd/dist/antd.css';
