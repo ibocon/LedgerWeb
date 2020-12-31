@@ -1,6 +1,11 @@
 // Modules
-import React, { useState } from 'react';
+import React from 'react';
+import { connect } from 'react-redux';
 import { Layout, Menu } from 'antd';
+
+// Sources
+import { RootState } from 'src/store/rootReducer';
+import { getSidebarCollapsed } from 'src/feature/interface';
 
 // Styles
 import 'antd/dist/antd.css';
@@ -13,12 +18,22 @@ import {
   UploadOutlined,
 } from '@ant-design/icons';
 
-export function Sider() {
-  
-  const [collapsed, setCollapsed]= useState(false);
+const mapStateToProps = (state: RootState) => ({
+  sidebarCollapsed: getSidebarCollapsed(state.interface),
+});
 
+const dispatchProps = {
+
+};
+
+type Props = {
+  sidebarCollapsed : boolean;
+};
+
+const FunctionComponent : React.FC<Props> = props => {
+  const { sidebarCollapsed } = props;
   return (
-    <Layout.Sider trigger={null} collapsible collapsed={collapsed}>
+    <Layout.Sider trigger={null} collapsible collapsed={sidebarCollapsed}>
       <div className="logo" />
       <Menu theme="dark" mode="inline" defaultSelectedKeys={['1']}>
         <Menu.Item key="1" icon={<UserOutlined />}>
@@ -33,7 +48,7 @@ export function Sider() {
       </Menu>
     </Layout.Sider>
   );
-  
-}
+};
 
+export const Sider =  connect(mapStateToProps, dispatchProps)(FunctionComponent);
 export default Sider;

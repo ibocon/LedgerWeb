@@ -39,4 +39,6 @@ export function interfaceReducer(
     }
 }
 
+export const getSidebarCollapsed = (state : InterfaceState) => state.sidebarCollapsed;
+
 export default interfaceReducer;

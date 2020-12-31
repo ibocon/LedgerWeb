@@ -1,6 +1,11 @@
 // Modules
-import React, { useState } from 'react';
+import React from 'react';
+import { connect } from 'react-redux';
 import { Layout } from 'antd';
+
+// Sources
+import { RootState } from 'src/store/rootReducer';
+import { getSidebarCollapsed, switchSidebarCollapsed } from 'src/feature/interface';
 
 // Styles
 import 'antd/dist/antd.css';
@@ -9,21 +14,34 @@ import './Header.sass';
 // Files
 import { MenuUnfoldOutlined, MenuFoldOutlined } from '@ant-design/icons';
 
-export function Header () {
+const mapStateToProps = (state: RootState) => ({
+  sidebarCollapsed: getSidebarCollapsed(state.interface),
+});
 
-  const [collapsed, setCollapsed]= useState(false);
+const dispatchProps = {
+  switchSidebarCollapsed: switchSidebarCollapsed,
+};
+
+type Props = {
+  sidebarCollapsed : boolean;
+  switchSidebarCollapsed : (isCollapsed: boolean) => void;
+};
+
+const FunctionComponent : React.FC<Props> = props => {
+  const { sidebarCollapsed, switchSidebarCollapsed } = props;
 
   return (
     <Layout.Header className='site-layout-background' style={{ padding: 0 }}>
       {React.createElement(
-        collapsed ? MenuUnfoldOutlined : MenuFoldOutlined,
+        sidebarCollapsed ? MenuUnfoldOutlined : MenuFoldOutlined,
         {
           className: 'trigger',
-          onClick: () => setCollapsed(!collapsed),
+          onClick: () => switchSidebarCollapsed(!sidebarCollapsed),
         }
       )}
     </Layout.Header>
   );
-}
+};
 
+export const Header =  connect(mapStateToProps, dispatchProps)(FunctionComponent);
 export default Header;
