@@ -1,33 +1,28 @@
 // Modules
 import { hot } from 'react-hot-loader/root';
 import React from 'react';
+import { Route, Switch } from 'react-router-dom';
 import { Layout } from 'antd';
 
 // Sources
-import { Header } from 'src/component/Header';
-import { Sider } from 'src/component/Sidebar';
+import { Introduction } from 'src/app/Introduction';
+import { Signup } from 'src/app/Signup';
+import { Login } from 'src/app/Login';
+import { Board } from 'src/app/Board';
 
 // Styles
 import 'antd/dist/antd.css';
 import './App.sass';
 
-function App() {
+export function App() {
   return (
-    <Layout style={{ minHeight: '100vh' }}>
-      <Sider />
-      <Layout className="site-layout">
-        <Header />
-        <Layout.Content
-          className="site-layout-background"
-          style={{
-            margin: '24px 16px',
-            padding: 24,
-            minHeight: 280,
-          }}>
-          <h1>Hello, World!</h1>
-          <p>Livereload</p>
-        </Layout.Content>
-      </Layout>
+    <Layout style={{ minHeight: '100vh' }} >
+      <Switch>
+        <Route exact path="/" component={Introduction} />
+        <Route path="/signup" component={Signup} />
+        <Route path="/login" component={Login} />
+        <Route path="/board" component={Board} />
+      </Switch>
     </Layout>
   );
 }

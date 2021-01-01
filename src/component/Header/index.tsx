@@ -2,6 +2,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Layout } from 'antd';
+import { MenuUnfoldOutlined, MenuFoldOutlined } from '@ant-design/icons';
 
 // Sources
 import { RootState } from 'src/store/rootReducer';
@@ -10,9 +11,6 @@ import { getSidebarCollapsed, switchSidebarCollapsed } from 'src/feature/interfa
 // Styles
 import 'antd/dist/antd.css';
 import './index.sass';
-
-// Files
-import { MenuUnfoldOutlined, MenuFoldOutlined } from '@ant-design/icons';
 
 const mapStateToProps = (state: RootState) => ({
   sidebarCollapsed: getSidebarCollapsed(state.interface),
