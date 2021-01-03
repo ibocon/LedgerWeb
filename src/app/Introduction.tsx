@@ -1,32 +1,36 @@
 // Modules
 import React from 'react';
-import { Layout } from 'antd';
+import { Layout, Menu } from 'antd';
 import styled from 'styled-components';
 
 // Styles
 import 'antd/dist/antd.css';
 
-const HeaderBackground = styled.div`
-    position: fixed;
-    z-index: 2;
-    width: 100vw;
-    padding: 0px 0px 3px 0px;
-`;
+const headerHeight = 64;
+const headerPadding = 50;
 const Header = styled(Layout.Header)`
     position: fixed;
     z-index: 1;
     width: 100vw;
-    background-color: #ffffff;
+    height: ${headerHeight}px;
+    padding: 0px ${headerPadding}px;
 `;
+
+const logoHeight = 36;
+const logoMargin = (headerHeight - logoHeight) / 2;
 const Logo = styled.div`
     float: left;
     width: 128px;
-    height: 64px;
-    background-color: #fe31de;
+    height: ${logoHeight}px;
+    margin: ${logoMargin}px 0px;
+    background-color: #bebebe;
 `;
+
+const contentMargin = 36;
+const contentPadding = headerPadding - contentMargin;
 const Content = styled(Layout.Content)`
-    padding: 0px 12px;
-    margin: 96px 18px 0px 18px;
+    padding: 0px ${contentPadding}px;
+    margin: 96px ${contentMargin}px 0px ${contentMargin}px;
     background-color: #ffffff;
 `;
 
@@ -34,13 +38,16 @@ const Content = styled(Layout.Content)`
 export function Introduction() {
     return(
         <Layout>
-            <HeaderBackground>
-                <Header>
-                    <Logo />
-                </Header>
-            </HeaderBackground>
+            <Header>
+                <Logo />
+                <Menu theme="dark" mode="horizontal">
+                    <Menu.Item style={{ float: 'right' }}>Signup</Menu.Item>
+                    <Menu.Item style={{ float: 'right' }}>Login</Menu.Item>
+                </Menu>
+            </Header>
             <Content>
                 <h1>Ledger application introduction</h1>
+                <p>Ledger application 에 대한 소개</p>
             </Content>
         </Layout>
     );
