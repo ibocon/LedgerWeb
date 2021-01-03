@@ -1,15 +1,16 @@
 // Modules
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { Layout } from 'antd';
 
 // Styles
 import 'antd/dist/antd.css';
-import './Login.sass';
 
+// Component
 export function Login() {
     return(
         <Layout>
-            <h1>Login</h1>
+            <Link to="/">Login</Link>
         </Layout>
     );
 }

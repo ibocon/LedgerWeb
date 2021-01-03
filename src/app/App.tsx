@@ -12,7 +12,6 @@ import { Board } from 'src/app/Board';
 
 // Styles
 import 'antd/dist/antd.css';
-import './App.sass';
 
 export function App() {
   return (
