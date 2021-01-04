@@ -5,6 +5,7 @@ import { Route, Switch } from 'react-router-dom';
 import { Layout } from 'antd';
 
 // Sources
+import { BreakPoint } from 'src/component/styles';
 import { Introduction } from 'src/app/Introduction';
 import { Signup } from 'src/app/Signup';
 import { Login } from 'src/app/Login';

@@ -1,11 +1,11 @@
 // Modules
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { Layout, Menu } from 'antd';
 
 // Sources
-import { Container } from 'src/component/styles';
+import { Container, BreakPoint } from 'src/component/styles';
 
 // Styles
 import 'antd/dist/antd.css';
@@ -43,22 +43,52 @@ const Content = styled(Layout.Content)`
 
 // Component
 export function Introduction() {
+
+    const [menuCollapsed, setMenuCollapsed] = useState(false);
+
+    function responsiveLayout() {
+        if(window.innerWidth < BreakPoint.Medium)
+            setMenuCollapsed(true);
+        else
+            setMenuCollapsed(false);
+    }
+
+    useEffect(() => {
+        window.addEventListener("resize", responsiveLayout);
+        return () => window.removeEventListener("resize", responsiveLayout);
+    });
+
+    const subPages = 
+        <React.Fragment>
+            <Menu.Item icon={<AppstoreOutlined />}>Features</Menu.Item>
+            <Menu.Item icon={<DesktopOutlined />}>Updates</Menu.Item>
+        </React.Fragment>
+    
     return(
         <Layout>
             <Header>
                 <Container>
                     <Logo />
-                    <Menu theme="dark" mode="horizontal" defaultOpenKeys={['left','right']}>
-                        <Menu.SubMenu key="left" title="Pages">
-                            <Menu.Item icon={<AppstoreOutlined />}>Features</Menu.Item>
-                            <Menu.Item icon={<DesktopOutlined />}>Updates</Menu.Item>
-                        </Menu.SubMenu>
+                    <Menu theme="dark" mode="horizontal">
+                        {
+                            menuCollapsed ? 
+                            (
+                                <Menu.SubMenu key="left" title="Pages">
+                                    {subPages}
+                                </Menu.SubMenu>
+                            ) : (
+                                subPages
+                            )
+                        }
                         <Menu.Item style={{ float: 'right' }}>
                             <Link to="/login">Login</Link>
                         </Menu.Item>
-                        <Menu.Item style={{ float: 'right' }}>
-                            <Link to="/signup">Signup</Link>
-                        </Menu.Item>
+                        {
+                            !menuCollapsed &&
+                            <Menu.Item style={{ float: 'right' }}>
+                                <Link to="/signup">Signup</Link>
+                            </Menu.Item>
+                        }
                     </Menu>
                 </Container>
             </Header>
@@ -71,5 +101,4 @@ export function Introduction() {
         </Layout>
     );
 }
-
 export default Introduction;
