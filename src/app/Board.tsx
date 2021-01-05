@@ -3,11 +3,12 @@ import React from 'react';
 import { Layout } from 'antd';
 
 // Sources
-import { Header } from 'src/component/Header';
-import { Sider } from 'src/component/Sidebar';
+import { 
+    Header, 
+    Sider 
+} from 'src/component';
 
 // Styles
-import 'antd/dist/antd.css';
 import './Board.sass';
 
 export function Board() {

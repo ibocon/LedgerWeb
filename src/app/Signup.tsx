@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom';
 import { Layout } from 'antd';
 
 // Styles
-import 'antd/dist/antd.css';
 
 // Component
 export function Signup() {

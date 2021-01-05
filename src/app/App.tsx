@@ -5,8 +5,7 @@ import { Route, Switch } from 'react-router-dom';
 import { Layout } from 'antd';
 
 // Sources
-import { BreakPoint } from 'src/component/styles';
-import { Introduction } from 'src/app/Introduction';
+import { IntroPage } from 'src/app/intro';
 import { Signup } from 'src/app/Signup';
 import { Login } from 'src/app/Login';
 import { Board } from 'src/app/Board';
@@ -18,7 +17,7 @@ export function App() {
   return (
     <Layout style={{ minHeight: '100vh' }} >
       <Switch>
-        <Route exact path="/" component={Introduction} />
+        <Route exact path="/" component={IntroPage} />
         <Route path="/signup" component={Signup} />
         <Route path="/login" component={Login} />
         <Route path="/board" component={Board} />
