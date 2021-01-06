@@ -5,25 +5,24 @@ import { Route, Switch } from 'react-router-dom';
 import { Layout } from 'antd';
 
 // Sources
-import { IntroPage } from 'src/app/intro';
-import { Signup } from 'src/app/Signup';
-import { Login } from 'src/app/Login';
-import { Board } from 'src/app/Board';
+import { IntroPage } from './intro';
+import { BoardPage } from './board';
+import { UserPage } from './user';
 
 // Styles
 import 'antd/dist/antd.css';
 
-export function App() {
-  return (
+const AppComponent : React.FC = props => {
+  return(
     <Layout style={{ minHeight: '100vh' }} >
       <Switch>
         <Route exact path="/" component={IntroPage} />
-        <Route path="/signup" component={Signup} />
-        <Route path="/login" component={Login} />
-        <Route path="/board" component={Board} />
+        <Route path="/user" component={UserPage} />
+        <Route path="/board" component={BoardPage} />
       </Switch>
-    </Layout>
+  </Layout>
   );
 }
 
-export default hot(App);
+export const App = hot(AppComponent);
+export default App;

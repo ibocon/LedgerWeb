@@ -55,11 +55,11 @@ const FuncComponent : React.FC = props => {
                         )}
                         <React.Fragment>
                             <RightMenuItem>
-                                <Link to="/login">Login</Link>
+                                <Link to="/user/login">Login</Link>
                             </RightMenuItem>
                         {!userMenuCollapsed &&
                             <RightMenuItem>
-                                <Link to="/signup">Signup</Link>
+                                <Link to="/user/signup">Signup</Link>
                             </RightMenuItem>
                         }
                         </React.Fragment>
