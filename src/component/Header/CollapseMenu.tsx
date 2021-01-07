@@ -1,7 +1,7 @@
 // Modules
 import React from 'react';
 import { connect } from 'react-redux';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { MenuUnfoldOutlined, MenuFoldOutlined } from '@ant-design/icons';
 
 // Sources
@@ -9,7 +9,7 @@ import { RootState } from 'src/store/rootReducer';
 import { getSidebarCollapsed, switchSidebarCollapsed } from 'src/feature/interface';
 
 // Styles
-const StyledMenuUnfoldOutlined = styled(MenuUnfoldOutlined)`
+const menuStyle = css`
     font-size: 18px;
     line-height: 64px;
     padding: 0 24px;
@@ -21,16 +21,12 @@ const StyledMenuUnfoldOutlined = styled(MenuUnfoldOutlined)`
     }
 `;
 
-const StyledMenufoldOutlined = styled(MenuFoldOutlined)`
-    font-size: 18px;
-    line-height: 64px;
-    padding: 0 24px;
-    cursor: pointer;
-    transition: color 0.3s;
+const StyledMenuUnfoldOutlined = styled(MenuUnfoldOutlined)`
+    ${menuStyle}
+`;
 
-    &:hover {
-        color: #1890ff;
-    }
+const StyledMenufoldOutlined = styled(MenuFoldOutlined)`
+    ${menuStyle}
 `;
 
 // Redux
