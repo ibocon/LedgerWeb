@@ -1,24 +1,22 @@
-// Modules
+// module
 import React from 'react';
 import { Layout } from 'antd';
 import styled from 'styled-components';
-
-// Sources
-import { 
-    Header, 
-    Sider 
-} from 'src/component';
-
-// Styles
+// source
+import { Header, Sider } from 'src/component';
+// style
 const StyledContent = styled(Layout.Content)`
     background-color: #ffffff;
     margin: 24px 16px;
     padding: 24px;
     min-height: 280px;
 `;
+// type
+export type BoardPageProps = { 
 
-// Component
-const FuncComponent : React.FC = props => {
+}
+// component
+export function BoardPage(props : BoardPageProps) {
     return(
         <Layout>
             <Sider />
@@ -31,5 +29,4 @@ const FuncComponent : React.FC = props => {
         </Layout>
     );
 }
-export const BoardPage = FuncComponent;
 export default BoardPage;

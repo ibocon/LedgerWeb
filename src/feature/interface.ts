@@ -1,44 +1,24 @@
-// Actions
-export const SWITCH_SIDEBAR_COLLAPSED = '@interface/switchSidebarCollapsed';
-
-interface SwitchSidebarCollapsedAction {
-    type: typeof SWITCH_SIDEBAR_COLLAPSED,
-    payload: boolean,
-}
-type InterfaceActionTypes = SwitchSidebarCollapsedAction;
-
-// Action Creators
-export function switchSidebarCollapsed(isCollapsed: boolean): InterfaceActionTypes {
-    return {
-        type: SWITCH_SIDEBAR_COLLAPSED,
-        payload: isCollapsed
-    }
-}
-
-// Reducer
-export type InterfaceState = {
-    sidebarCollapsed: boolean;
+// module
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+// type
+type interfaceState = {
+    sidebarCollapsed : boolean;
 };
-
-const initialState : InterfaceState = { 
-    sidebarCollapsed: false,
-};
-
-export function interfaceReducer(
-    state = initialState,
-    action: InterfaceActionTypes
-) : InterfaceState {
-    switch (action.type) {
-        case SWITCH_SIDEBAR_COLLAPSED:
-            return {
-                ...state,
-                sidebarCollapsed: action.payload
-            }
-        default:
-            return state;
+// selector
+export const selectSidebarCollapsed = (state : interfaceState) => state.sidebarCollapsed;
+// slice
+export const interfaceSlice = createSlice({
+    name: 'interface',
+    initialState: {
+        sidebarCollapsed: false,
+    },
+    reducers: {
+        switchSidebarCollapsed: (state, action : PayloadAction<boolean>) => {
+            state.sidebarCollapsed = action.payload;
+        },
     }
-}
-
-export const getSidebarCollapsed = (state : InterfaceState) => state.sidebarCollapsed;
-
+});
+// action
+export const { switchSidebarCollapsed } = interfaceSlice.actions;
+export const interfaceReducer = interfaceSlice.reducer;
 export default interfaceReducer;

@@ -1,12 +1,21 @@
-// Modules
+// module
+import { Menu } from 'antd';
 import React, { useState, useEffect } from 'react';
-import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-// Sources
+// source
 import { BreakPoint } from 'src/component';
-import { RightMenuItem } from './styled';
-// Component
-const FuncComponent : React.FC = props => {
+// type
+export type UserMenuProps = {
+
+}
+// component
+export function UserMenu(props : UserMenuProps) {
+    const [collapsed, setCollapsed] = useState(false);
+
+    useEffect(() => {
+        window.addEventListener("resize", onResized);
+        return () => window.removeEventListener("resize", onResized);
+    });
 
     function onResized() {
         if(window.innerWidth < BreakPoint.Medium)
@@ -15,25 +24,17 @@ const FuncComponent : React.FC = props => {
             setCollapsed(false);
     }
 
-    const [collapsed, setCollapsed] = useState(false);
-
-    useEffect(() => {
-        window.addEventListener("resize", onResized);
-        return () => window.removeEventListener("resize", onResized);
-    });
-
     return(
         <React.Fragment>
-            <RightMenuItem>
+            <Menu.Item style={{ float: 'right' }}>
                 <Link to="/login">Login</Link>
-            </RightMenuItem>
+            </Menu.Item>
         {!collapsed &&
-            <RightMenuItem>
+            <Menu.Item style={{ float: 'right' }}>
                 <Link to="/signup">Signup</Link>
-            </RightMenuItem>
+            </Menu.Item>
         }
         </React.Fragment>
     );
 }
-export const UserMenu = connect()(FuncComponent);
 export default UserMenu;

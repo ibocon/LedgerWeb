@@ -1,18 +1,20 @@
-// Modules
+// module
 import { hot } from 'react-hot-loader/root';
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
 import { Layout } from 'antd';
-
-// Sources
+// source
 import { IntroPage } from './intro';
 import { BoardPage } from './board';
 import { UserPage } from './user';
-
-// Styles
+// style
 import 'antd/dist/antd.css';
+// type
+export type AppProps = {
 
-const AppComponent : React.FC = props => {
+}
+// component
+function AppComponent (props : AppProps) {
   return(
     <Layout style={{ minHeight: '100vh' }} >
       <Switch>

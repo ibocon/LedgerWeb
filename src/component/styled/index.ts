@@ -1,6 +1,6 @@
+// module
 import styled from 'styled-components';
-
-// Variables
+// variable
 export enum AbsoluteLengthUnit {
     Pixel = 'px',       // 1 inch = 96 pixels 
     Point = 'pt',       // 1 inch = 72 pixels
@@ -11,7 +11,6 @@ export enum RelativeLengthUnit {
     ViewHeight = 'vh',  // Relative to 1% of the height of the viewport
 }
 export type LengthUnit = AbsoluteLengthUnit | RelativeLengthUnit;
-
 export enum BreakPoint {
     XSmall = 0,
     Small = 576,
@@ -20,13 +19,11 @@ export enum BreakPoint {
     XLarge = 1200,
     XXLarge = 1400
 }
-
-// Methods
+// method
 export function BreakPointLengthString(breakPoint : BreakPoint) : string {
     return `${breakPoint}px`;
 }
-
-// Styled components
+// styled component
 export const Container = styled.div`
     max-width: ${BreakPointLengthString(BreakPoint.XLarge)};
     margin-left: auto;

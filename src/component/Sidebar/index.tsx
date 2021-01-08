@@ -1,29 +1,18 @@
-// Modules
+// module
 import React from 'react';
-import { connect } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { Layout, Menu } from 'antd';
 import { UserOutlined, VideoCameraOutlined, UploadOutlined } from '@ant-design/icons';
-
-// Sources
-import { RootState } from 'src/store/rootReducer';
-import { getSidebarCollapsed } from 'src/feature/interface';
-
-// Styles
-
-const mapStateToProps = (state: RootState) => ({
-  sidebarCollapsed: getSidebarCollapsed(state.interface),
-});
-
-const dispatchProps = {
+// source
+import { selectSidebarCollapsed } from 'src/feature/interface';
+// type
+type SiderProps = {
 
 };
+// component
+export function Sider(props : SiderProps) {
+  const sidebarCollapsed = useSelector(selectSidebarCollapsed);
 
-type Props = {
-  sidebarCollapsed : boolean;
-};
-
-const FuncComponent : React.FC<Props> = props => {
-  const { sidebarCollapsed } = props;
   return (
     <Layout.Sider trigger={null} collapsible collapsed={sidebarCollapsed}>
       <div className="logo" />
@@ -41,6 +30,4 @@ const FuncComponent : React.FC<Props> = props => {
     </Layout.Sider>
   );
 };
-
-export const Sider =  connect(mapStateToProps, dispatchProps)(FuncComponent);
 export default Sider;

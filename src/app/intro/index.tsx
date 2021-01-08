@@ -1,22 +1,55 @@
-// Modules
+// module
 import React, { useState, useEffect } from 'react';
-import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
+import styled from 'styled-components';
 import { Layout, Menu } from 'antd';
 import { AppstoreOutlined, DesktopOutlined } from '@ant-design/icons';
-// Sources
+// source
 import { BreakPoint, Container } from 'src/component';
-// Styles
-import { StyledHeader, StyledLogo, StyledContent, RightMenuItem } from'./styled';
-// Component
+// style
+const headerHeight = 64;
+const headerPadding = 50;
+const StyledHeader = styled(Layout.Header)`
+    position: fixed;
+    z-index: 1;
+    width: 100vw;
+    height: ${headerHeight}px;
+    padding: 0px ${headerPadding}px;
+`;
+const logoHeight = 36;
+const logoMargin = (headerHeight - logoHeight) / 2;
+const StyledLogo = styled.div`
+    float: left;
+    width: 128px;
+    height: ${logoHeight}px;
+    margin: ${logoMargin}px 8px ${logoMargin}px 0px;
+    background-color: #bebebe;
+`;
+const contentPadding = headerPadding;
+const StyledContent = styled(Layout.Content)`
+    padding: 0px ${contentPadding}px;
+    margin-top: ${headerHeight}px;
+    background-color: #ffffff;
+`;
+// type
+export type IntroPageProps = {
+
+}
+// component
 const IntroMenuItems = (
     <React.Fragment>
         <Menu.Item icon={<AppstoreOutlined />}>Features</Menu.Item>
         <Menu.Item icon={<DesktopOutlined />}>Updates</Menu.Item>
     </React.Fragment>
 );
+export function IntroPage(props : IntroPageProps) {
+    const [introMenuCollapsed, setIntroMenuCollapsed] = useState(false);
+    const [userMenuCollapsed, setUserMenuCollapsed] = useState(false);
 
-const FuncComponent : React.FC = props => {
+    useEffect(() => {
+        window.addEventListener("resize", onResized);
+        return () => window.removeEventListener("resize", onResized);
+    });
 
     function onResized() {
         if(window.innerWidth < BreakPoint.Small)
@@ -29,14 +62,6 @@ const FuncComponent : React.FC = props => {
         else
             setUserMenuCollapsed(false);
     }
-
-    const [introMenuCollapsed, setIntroMenuCollapsed] = useState(false);
-    const [userMenuCollapsed, setUserMenuCollapsed] = useState(false);
-
-    useEffect(() => {
-        window.addEventListener("resize", onResized);
-        return () => window.removeEventListener("resize", onResized);
-    });
 
     return(
         <Layout>
@@ -54,13 +79,13 @@ const FuncComponent : React.FC = props => {
                             </React.Fragment>
                         )}
                         <React.Fragment>
-                            <RightMenuItem>
+                            <Menu.Item style={{ float: 'right' }}>
                                 <Link to="/user/login">Login</Link>
-                            </RightMenuItem>
+                            </Menu.Item>
                         {!userMenuCollapsed &&
-                            <RightMenuItem>
+                            <Menu.Item style={{ float: 'right' }}>
                                 <Link to="/user/signup">Signup</Link>
-                            </RightMenuItem>
+                            </Menu.Item>
                         }
                         </React.Fragment>
                     </Menu>
@@ -75,5 +100,4 @@ const FuncComponent : React.FC = props => {
         </Layout>
     );
 }
-export const IntroPage = connect()(FuncComponent);
 export default IntroPage;

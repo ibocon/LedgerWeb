@@ -1,12 +1,12 @@
-// Modules
+// module
 import React from 'react';
 import { Switch, Route, Link } from 'react-router-dom';
-import { Layout } from 'antd';
+// type
+export type UserPageProps = {
 
-// Styles
-
-// Component
-const FuncComponent : React.FC = props => {
+}
+// component
+export function UserPage(props : UserPageProps) {
     return(
         <Switch>
             <Route path="/user/login">
@@ -18,5 +18,4 @@ const FuncComponent : React.FC = props => {
         </Switch>
     );
 }
-export const UserPage = FuncComponent;
 export default UserPage;
