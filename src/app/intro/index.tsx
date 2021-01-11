@@ -1,11 +1,13 @@
 // module
-import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import React from 'react';
 import styled from 'styled-components';
 import { Layout, Menu } from 'antd';
-import { AppstoreOutlined, DesktopOutlined } from '@ant-design/icons';
 // source
-import { BreakPoint, Container } from 'src/component';
+import { BasicRouteComponentProps } from 'src/index.d.ts';
+import { Container } from 'src/component';
+import UserMenu from './UserMenu';
+import IntroMenu from './IntroMenu';
+
 // style
 const headerHeight = 64;
 const headerPadding = 50;
@@ -32,36 +34,12 @@ const StyledContent = styled(Layout.Content)`
     background-color: #ffffff;
 `;
 // type
-export type IntroPageProps = {
+export interface IntroPageProps extends BasicRouteComponentProps {
 
 }
 // component
-const IntroMenuItems = (
-    <React.Fragment>
-        <Menu.Item icon={<AppstoreOutlined />}>Features</Menu.Item>
-        <Menu.Item icon={<DesktopOutlined />}>Updates</Menu.Item>
-    </React.Fragment>
-);
 export function IntroPage(props : IntroPageProps) {
-    const [introMenuCollapsed, setIntroMenuCollapsed] = useState(false);
-    const [userMenuCollapsed, setUserMenuCollapsed] = useState(false);
-
-    useEffect(() => {
-        window.addEventListener("resize", onResized);
-        return () => window.removeEventListener("resize", onResized);
-    });
-
-    function onResized() {
-        if(window.innerWidth < BreakPoint.Small)
-            setIntroMenuCollapsed(true);
-        else
-            setIntroMenuCollapsed(false);
-
-        if(window.innerWidth < BreakPoint.Medium)
-            setUserMenuCollapsed(true);
-        else
-            setUserMenuCollapsed(false);
-    }
+    const { history, location, match, staticContext, ...others } = props;
 
     return(
         <Layout>
@@ -69,25 +47,8 @@ export function IntroPage(props : IntroPageProps) {
                 <Container>
                     <StyledLogo />
                     <Menu theme="dark" mode="horizontal">
-                        {introMenuCollapsed ? (
-                            <Menu.SubMenu title="Introduction">
-                                {IntroMenuItems}
-                            </Menu.SubMenu>
-                        ) : (
-                            <React.Fragment>
-                                {IntroMenuItems}
-                            </React.Fragment>
-                        )}
-                        <React.Fragment>
-                            <Menu.Item style={{ float: 'right' }}>
-                                <Link to="/user/login">Login</Link>
-                            </Menu.Item>
-                        {!userMenuCollapsed &&
-                            <Menu.Item style={{ float: 'right' }}>
-                                <Link to="/user/signup">Signup</Link>
-                            </Menu.Item>
-                        }
-                        </React.Fragment>
+                        <IntroMenu {...others} />
+                        <UserMenu {...others} />
                     </Menu>
                 </Container>
             </StyledHeader>

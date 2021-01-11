@@ -26,15 +26,16 @@ export function UserMenu(props : UserMenuProps) {
 
     return(
         <React.Fragment>
-            <Menu.Item style={{ float: 'right' }}>
-                <Link to="/login">Login</Link>
+            <Menu.Item { ...props } style={{ float: 'right' }}>
+                <Link to="/user/login">Login</Link>
             </Menu.Item>
         {!collapsed &&
-            <Menu.Item style={{ float: 'right' }}>
-                <Link to="/signup">Signup</Link>
+            <Menu.Item { ...props } style={{ float: 'right' }}>
+                <Link to="/user/signup">Signup</Link>
             </Menu.Item>
         }
         </React.Fragment>
     );
 }
 export default UserMenu;
+// https://stackoverflow.com/questions/50573609/fail-creating-a-submenu-in-a-component-with-antd

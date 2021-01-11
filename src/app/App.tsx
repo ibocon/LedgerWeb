@@ -1,7 +1,7 @@
 // module
 import { hot } from 'react-hot-loader/root';
 import React from 'react';
-import { Route, Switch } from 'react-router-dom';
+import { Redirect, Route, Switch } from 'react-router-dom';
 import { Layout } from 'antd';
 // source
 import { IntroPage } from './intro';
@@ -21,6 +21,7 @@ function AppComponent (props : AppProps) {
         <Route exact path="/" component={IntroPage} />
         <Route path="/user" component={UserPage} />
         <Route path="/board" component={BoardPage} />
+        <Redirect to="/" />
       </Switch>
   </Layout>
   );
