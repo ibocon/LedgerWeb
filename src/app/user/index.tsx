@@ -1,6 +1,35 @@
 // module
 import React from 'react';
-import { Switch, Route, Link } from 'react-router-dom';
+import { Switch, Route } from 'react-router-dom';
+import styled from 'styled-components';
+import { Layout } from 'antd';
+// source
+import { BreakPoint } from 'src/component/styled';
+import Login from './Login';
+import Signup from './Signup';
+// style
+const VerticalContainer = styled(Layout)`
+    // layout
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    @media(max-width: ${BreakPoint.Small}px) {
+        justify-content: flex-start;
+        align-items: flex-start;
+    }
+`;
+const Bumper = styled.div`
+    min-height: 30px;
+    @media(max-width: ${BreakPoint.Small}px) {
+        display: none;
+    }
+`;
+const HorizontalContainer = styled(Layout)`
+    // layout
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+`;
 // type
 export type UserPageProps = {
 
@@ -8,14 +37,19 @@ export type UserPageProps = {
 // component
 export function UserPage(props : UserPageProps) {
     return(
-        <Switch>
-            <Route path="/user/login">
-                <Link to="/">Login</Link>
-            </Route>
-            <Route path="/user/signup">
-                <Link to="/">Signup</Link>
-            </Route>
-        </Switch>
-    );
+        <VerticalContainer>
+            <HorizontalContainer>
+                <Bumper />
+                <Switch>
+                    <Route path="/user/login">
+                        <Login />
+                    </Route>
+                    <Route path="/user/signup">
+                        <Signup />
+                    </Route>
+                </Switch>
+            </HorizontalContainer>
+        </VerticalContainer>
+    )
 }
 export default UserPage;

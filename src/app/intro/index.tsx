@@ -7,7 +7,6 @@ import { BasicRouteComponentProps } from 'src/index.d.ts';
 import { Container } from 'src/component';
 import UserMenu from './UserMenu';
 import IntroMenu from './IntroMenu';
-
 // style
 const headerHeight = 64;
 const headerPadding = 50;
