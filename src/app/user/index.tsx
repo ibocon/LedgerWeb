@@ -7,6 +7,7 @@ import { Layout } from 'antd';
 import { BreakPoint } from 'src/component/styled';
 import Login from './Login';
 import Signup from './Signup';
+import Recovery from './Recovery';
 // style
 const VerticalContainer = styled(Layout)`
     // layout
@@ -46,6 +47,9 @@ export function UserPage(props : UserPageProps) {
                     </Route>
                     <Route path="/user/signup">
                         <Signup />
+                    </Route>
+                    <Route path="/user/recovery">
+                        <Recovery />
                     </Route>
                 </Switch>
             </HorizontalContainer>
