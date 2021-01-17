@@ -39,6 +39,15 @@ export function Signup() {
                         prefix={<KeyOutlined />}
                         placeholder="Enter password" />
                 </Form.Item>
+                <Form.Item
+                    name="confirmPassword"
+                    label={<Label>Confirm password</Label>}
+                    rules={[{ required:true, message: 'Please confirm your password.'}]}>
+                    <Input.Password 
+                        size="large" 
+                        prefix={<KeyOutlined />}
+                        placeholder="Confirm password" />
+                </Form.Item>
                 <Form.Item>
                     <Button
                         style={{ 
