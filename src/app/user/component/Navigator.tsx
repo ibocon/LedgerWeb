@@ -13,10 +13,11 @@ export function Navigator(props : {text : string, link : React.ReactNode}) {
                 style={{
                     // Layout
                     alignSelf: 'center',
+                    marginBottom: '0px',
                     marginRight: '8px',
                     // Text
                     lineHeight: 1.32,
-                    color: 'rgb(160, 160, 160)',
+                    color: 'rgb(126, 126, 126)',
                     fontSize: '14px'
                 }}>
                 {props.text}

@@ -3,7 +3,7 @@ import React from 'react';
 import { Layout } from 'antd';
 import styled from 'styled-components';
 // source
-import { Header, Sider } from 'src/component';
+import { Header, Sider } from 'src/app/component';
 // style
 const StyledContent = styled(Layout.Content)`
     background-color: #ffffff;

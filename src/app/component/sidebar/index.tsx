@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux';
 import { Layout, Menu } from 'antd';
 import { UserOutlined, VideoCameraOutlined, UploadOutlined } from '@ant-design/icons';
 // source
-import { selectSidebarCollapsed } from 'src/feature/interface';
+import { selectSidebarCollapsed } from 'src/app/feature/interface';
 // type
 type SiderProps = {
 

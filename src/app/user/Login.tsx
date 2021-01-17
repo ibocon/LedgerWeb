@@ -2,15 +2,27 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Button, Form, Input, Checkbox } from 'antd';
-import { UserOutlined, KeyOutlined } from '@ant-design/icons';
+import { UserOutlined, LockOutlined } from '@ant-design/icons';
 // source
-import { Container } from './component/Container';
-import { Logo } from './component/Logo';
-import { Header } from './component/Header';
-import { Navigator } from './component/Navigator';
-import { Label } from './component/Label';
+import { UserService } from 'src/api';
+import { Container, Logo, Header, Navigator, Label } from './component';
+// type
+type FormProps = {
+    email : string;
+    password : string;
+    isStaySignedIn : boolean;
+};
 // component
 export function Login() {
+    const onFinish = ({email, password, isStaySignedIn } : FormProps) => {
+        let isLoginSuccess = UserService.login(email, password, isStaySignedIn);
+        if(isLoginSuccess) {
+            console.log("로그인에 성공했습니다.");
+        } else {
+            console.log("로그인에 실패했습니다.");
+        }
+    };
+
     return(
         <Container>
             <Logo />
@@ -20,7 +32,9 @@ export function Login() {
                 link={<Link to="/user/signup">Sign Up</Link>} />
             <Form
                 layout="vertical"
-                requiredMark={false}>
+                requiredMark={false}
+                onFinish={onFinish}
+                initialValues={{isStaySignedIn : true}}>
                 <Form.Item
                     name="email"
                     label={<Label>Email</Label>}
@@ -36,26 +50,27 @@ export function Login() {
                     rules={[{ required:true, message: 'Please input your password.'}]}>
                     <Input.Password 
                         size="large" 
-                        prefix={<KeyOutlined />}
+                        prefix={<LockOutlined />}
                         placeholder="Enter password" />
                 </Form.Item>
                 <Form.Item
-                    name="staySiginin">
-                    <Checkbox 
-                        checked={true}>
+                    name="isStaySignedIn"
+                    valuePropName="checked">
+                    <Checkbox>
                         Stay signed in
                     </Checkbox>
                 </Form.Item>
                 <Form.Item>
                     <Button 
+                        htmlType="submit"
                         type="primary"
                         size="large"
                         block={true}>
                         Sign in
                     </Button>
                 </Form.Item>
+                <Link to="/user/recovery" style={{ float: 'right'}}>Forgot password?</Link>
             </Form>
-            <Link to="/user/recovery" style={{ alignSelf: 'flex-end'}}>Forgot password?</Link>
         </Container>
     )
 }

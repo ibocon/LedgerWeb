@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { Menu } from 'antd';
 import { AppstoreOutlined, DesktopOutlined } from '@ant-design/icons';
 // source
-import { BreakPoint } from 'src/component';
+import { BreakPoint } from 'src/app/component';
 // type
 export type IntroMenuProps = {
 

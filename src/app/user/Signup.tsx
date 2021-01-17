@@ -2,13 +2,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Button, Form, Input } from 'antd';
-import { UserOutlined, KeyOutlined } from '@ant-design/icons';
+import { UserOutlined, LockOutlined } from '@ant-design/icons';
 // source
-import { Container } from './component/Container';
-import { Logo } from './component/Logo';
-import { Header } from './component/Header';
-import { Navigator } from './component/Navigator';
-import { Label } from './component/Label';
+import { Container, Logo, Header, Navigator, Label } from './component';
 // component
 export function Signup() {
     return(
@@ -36,7 +32,7 @@ export function Signup() {
                     rules={[{ required:true, message: 'Please input your password.'}]}>
                     <Input.Password 
                         size="large" 
-                        prefix={<KeyOutlined />}
+                        prefix={<LockOutlined />}
                         placeholder="Enter password" />
                 </Form.Item>
                 <Form.Item
@@ -45,16 +41,14 @@ export function Signup() {
                     rules={[{ required:true, message: 'Please confirm your password.'}]}>
                     <Input.Password 
                         size="large" 
-                        prefix={<KeyOutlined />}
+                        prefix={<LockOutlined />}
                         placeholder="Confirm password" />
                 </Form.Item>
                 <Form.Item>
                     <Button
-                        style={{ 
-                            float: 'right',
-                            minWidth: '150px' }}
                         type="primary"
-                        size="large">
+                        size="large"
+                        block={true}>
                         Sign Up
                     </Button>
                 </Form.Item>

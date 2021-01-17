@@ -4,7 +4,7 @@ import { Switch, Route } from 'react-router-dom';
 import styled from 'styled-components';
 import { Layout } from 'antd';
 // source
-import { BreakPoint } from 'src/component/styled';
+import { BreakPoint } from 'src/app/component/styled';
 import Login from './Login';
 import Signup from './Signup';
 import Recovery from './Recovery';

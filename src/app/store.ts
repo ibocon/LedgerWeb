@@ -5,8 +5,8 @@ import { logger } from 'redux-logger';
 import { connectRouter } from 'connected-react-router';
 import { createBrowserHistory, LocationState } from 'history';
 // source
-import { interfaceReducer } from 'src/feature/interface';
-import { userReducer } from 'src/feature/user';
+import { interfaceReducer } from 'src/app/feature/interface';
+import { userReducer } from 'src/app/feature/user';
 
 export const history = createBrowserHistory<LocationState>();
 // root reducer

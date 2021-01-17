@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import styled, { css } from 'styled-components';
 import { MenuUnfoldOutlined, MenuFoldOutlined } from '@ant-design/icons';
 // source
-import { selectSidebarCollapsed, switchSidebarCollapsed } from 'src/feature/interface';
+import { selectSidebarCollapsed, switchSidebarCollapsed } from 'src/app/feature/interface';
 // style
 const menuStyle = css`
     font-size: 18px;

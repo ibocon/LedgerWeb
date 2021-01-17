@@ -4,22 +4,26 @@ import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { ConnectedRouter } from 'connected-react-router';
 // source
-import { reportWebVitals } from 'src/reportWebVitals';
-import App from 'src/app/App';
-import { store, history } from 'src/app/store';
+import { reportWebVitals } from './reportWebVitals';
+import App from './app/App';
+import { store, history } from './app/store';
+import { mockServer } from './server';
 // style
 import 'src/normalize.css';
 import 'src/index.sass';
 // main
+if (process.env.NODE_ENV === "development") {
+    mockServer({ environment: "development" })
+}
 ReactDOM.render(
-  <React.StrictMode>
-    <Provider store={store}>
-      <ConnectedRouter history={history}>
-          <App />
-      </ConnectedRouter>
-    </Provider>
-  </React.StrictMode>,
-  document.getElementById('root')
+    <React.StrictMode>
+        <Provider store={store}>
+            <ConnectedRouter history={history}>
+                <App />
+            </ConnectedRouter>
+        </Provider>
+     </React.StrictMode>,
+    document.getElementById('root')
 );
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))

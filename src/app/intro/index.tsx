@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import { Layout, Menu } from 'antd';
 // source
 import { BasicRouteComponentProps } from 'src/index.d.ts';
-import { Container } from 'src/component';
+import { Container } from 'src/app/component';
 import UserMenu from './UserMenu';
 import IntroMenu from './IntroMenu';
 // style

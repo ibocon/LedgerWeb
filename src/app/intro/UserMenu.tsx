@@ -3,7 +3,7 @@ import { Menu } from 'antd';
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 // source
-import { BreakPoint } from 'src/component';
+import { BreakPoint } from 'src/app/component';
 // type
 export type UserMenuProps = {
 
