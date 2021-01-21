@@ -3,7 +3,6 @@ import React from 'react';
 import styled from 'styled-components';
 import { Layout, Menu } from 'antd';
 // source
-import { BasicRouteComponentProps } from 'src/index.d.ts';
 import { Container } from 'src/app/component';
 import UserMenu from './UserMenu';
 import IntroMenu from './IntroMenu';
@@ -32,12 +31,8 @@ const StyledContent = styled(Layout.Content)`
     margin-top: ${headerHeight}px;
     background-color: #ffffff;
 `;
-// type
-export interface IntroPageProps extends BasicRouteComponentProps {
-
-}
 // component
-export function IntroPage(props : IntroPageProps) {
+export function IntroPage(props : BasicRouteComponentProps) {
     const { history, location, match, staticContext, ...others } = props;
 
     return(

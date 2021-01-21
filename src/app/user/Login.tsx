@@ -1,26 +1,18 @@
 // module
 import React from 'react';
+import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { Button, Form, Input, Checkbox } from 'antd';
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
 // source
-import { UserService } from 'src/api';
 import { Container, Logo, Header, Navigator, Label } from './component';
-// type
-type FormProps = {
-    email : string;
-    password : string;
-    isStaySignedIn : boolean;
-};
+import { login } from 'src/app/feature/user';
 // component
 export function Login() {
-    const onFinish = ({email, password, isStaySignedIn } : FormProps) => {
-        let isLoginSuccess = UserService.login(email, password, isStaySignedIn);
-        if(isLoginSuccess) {
-            console.log("로그인에 성공했습니다.");
-        } else {
-            console.log("로그인에 실패했습니다.");
-        }
+    const dispatch = useDispatch();
+    // 2021.01.21 TODO login 요청을 대기하면서, 로그인 실패 시 적절한 오류 메세지를 UI 에 표시하자.
+    const onFinish = async ({email, password, isStaySignedIn } : LoginRequest) => {
+        const resultAction = await dispatch(login({email, password, isStaySignedIn}));
     };
 
     return(

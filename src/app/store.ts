@@ -2,16 +2,11 @@
 import { combineReducers } from 'redux';
 import { configureStore, getDefaultMiddleware } from '@reduxjs/toolkit';
 import { logger } from 'redux-logger';
-import { connectRouter } from 'connected-react-router';
-import { createBrowserHistory, LocationState } from 'history';
 // source
 import { interfaceReducer } from 'src/app/feature/interface';
 import { userReducer } from 'src/app/feature/user';
-
-export const history = createBrowserHistory<LocationState>();
 // root reducer
 const rootReducer = combineReducers({
-    router: connectRouter(history),
     interface: interfaceReducer,
     user: userReducer
 });

@@ -2,27 +2,27 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
-import { ConnectedRouter } from 'connected-react-router';
+import { BrowserRouter } from 'react-router-dom';
 // source
 import { reportWebVitals } from './reportWebVitals';
 import App from './app/App';
-import { store, history } from './app/store';
+import { store } from './app/store';
 import { mockServer } from './server';
 // style
 import 'src/normalize.css';
 import 'src/index.sass';
 // main
-if (process.env.NODE_ENV === "development") {
-    mockServer({ environment: "development" })
-}
+// if (process.env.NODE_ENV === "development") {
+//     mockServer({ environment: "development" });
+// }
 ReactDOM.render(
     <React.StrictMode>
         <Provider store={store}>
-            <ConnectedRouter history={history}>
+            <BrowserRouter>
                 <App />
-            </ConnectedRouter>
+            </BrowserRouter>
         </Provider>
-     </React.StrictMode>,
+    </React.StrictMode>,
     document.getElementById('root')
 );
 // If you want to start measuring performance in your app, pass a function

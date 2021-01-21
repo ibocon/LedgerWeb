@@ -5,9 +5,9 @@ import styled from 'styled-components';
 import { Layout } from 'antd';
 // source
 import { BreakPoint } from 'src/app/component/styled';
-import Login from './Login';
-import Signup from './Signup';
-import Recovery from './Recovery';
+import { Login } from './Login';
+import { Signup } from './Signup';
+import { Recovery } from './Recovery';
 // style
 const VerticalContainer = styled(Layout)`
     // layout
@@ -31,12 +31,8 @@ const HorizontalContainer = styled(Layout)`
     flex-direction: column;
     align-items: center;
 `;
-// type
-export type UserPageProps = {
-
-}
 // component
-export function UserPage(props : UserPageProps) {
+export function UserPage() {
     return(
         <VerticalContainer>
             <HorizontalContainer>

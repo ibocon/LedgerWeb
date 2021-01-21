@@ -1,27 +1,43 @@
 // module
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { createSlice, createAsyncThunk, SliceCaseReducers } from '@reduxjs/toolkit';
+import { UserService } from 'src/api/UserService';
 // type
-type UserState = {
-    email: string;
-}
+const name : string = "user";
+interface UserState extends UserModel { }
+// action
+export const login = createAsyncThunk<UserState, LoginRequest, {}>(
+    `${name}/login`, 
+    async (args : LoginRequest) : Promise<UserState> => {
+        const user = await UserService.login({
+            email: args.email,
+            password: args.password,
+            isStaySignedIn: args.isStaySignedIn,
+        });
+
+        return user;
+    });
 // selector
 export const selectEmail = (state : UserState) => state.email;
 // slice
-export const userSlice = createSlice({
-    name: 'user',
+export const userSlice = createSlice<UserState, SliceCaseReducers<UserState>>({
+    name: name,
     initialState: {
-        email: '',
+        id: null,
+        email: null,
     },
     reducers:{
-        login: (state, action : PayloadAction<string>) => {
-            state.email = action.payload;
-        },
         logout: (state) => {
             state.email = '';
         },
+    },
+    extraReducers: builder => {
+        builder.addCase(login.fulfilled, (state : UserState, { payload } : { payload : UserState}) => {
+            state.id = payload.id;
+            state.email = payload.email;
+        });
     }
 });
 // action
-export const { login, logout } = userSlice.actions;
+export const { logout } = userSlice.actions;
 export const userReducer = userSlice.reducer;
 export default userReducer;

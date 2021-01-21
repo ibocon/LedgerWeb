@@ -2,27 +2,28 @@
 import client from './client';
 import token from './token';
 // type
-type User = {
-    email: string;
-};
+interface UserResponse extends UserModel {
+    token : string;
+}
 // service
 export const UserService = {
-    get: async (email : string) => {
-        return client.get<User>(`/api/user/${email}`, {
+    get: async (email : string) : Promise<UserModel> => {
+        var response = await client.get<UserModel>(`/api/user/${email}`, {
             headers: { Authorization: `Bearer ${token.get()}` }
         });
+        return response.data;
     },
-    login: async (email : string, password : string, isStaySignedIn : boolean) => {
+    login: async (request : LoginRequest): Promise<UserModel> => {
         try{
-            let response = await client.post<{token : string}>(`/api/user/login`, {
-                email: email,
-                password: password,
+            let response = await client.post<UserResponse>(`/api/user/login`, {
+                email: request.email,
+                password: request.password,
             });
-            token.set(response.data.token, isStaySignedIn);
-            return true;
+            token.set(response.data.token, request.isStaySignedIn);
+            return { id: response.data.id, email: response.data.email };
         } catch {
             token.clear();
-            return false;
+            return { id: null, email: null };
         }
     }
 };
