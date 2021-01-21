@@ -60,7 +60,7 @@ module.exports = {
   devtool: "inline-source-map",
   devServer: {
     contentBase: distPath,
-    historyApiFallback: { index: path.join(distPath, "index.html")},
+    historyApiFallback: true,
     hot: true,
     inline: true,
     writeToDisk: true,
