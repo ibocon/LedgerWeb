@@ -12,9 +12,9 @@ import { mockServer } from './server';
 import 'src/normalize.css';
 import 'src/index.sass';
 // main
-// if (process.env.NODE_ENV === "development") {
-//     mockServer({ environment: "development" });
-// }
+if (process.env.NODE_ENV === "development") {
+    mockServer({ environment: "development" });
+}
 ReactDOM.render(
     <React.StrictMode>
         <Provider store={store}>

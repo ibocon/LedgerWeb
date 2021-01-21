@@ -5,7 +5,7 @@ import { UserService } from 'src/api/UserService';
 const name : string = "user";
 interface UserState extends UserModel { }
 // action
-export const login = createAsyncThunk<UserState, LoginRequest, {}>(
+export const login = createAsyncThunk<UserState, LoginRequest>(
     `${name}/login`, 
     async (args : LoginRequest) : Promise<UserState> => {
         const user = await UserService.login({

@@ -20,6 +20,7 @@ export const mockServer = ({ environment = 'test' }) => {
         },
         // route
         routes() {
+            this.timing = 1000;
             this.namespace = "api";
             this.post('/user/login', (schema, request) => {
                 const requestUser = JSON.parse(request.requestBody);

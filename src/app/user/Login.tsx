@@ -1,18 +1,44 @@
 // module
-import React from 'react';
-import { useDispatch } from 'react-redux';
-import { Link } from 'react-router-dom';
-import { Button, Form, Input, Checkbox } from 'antd';
-import { UserOutlined, LockOutlined } from '@ant-design/icons';
+import React, { useState } from 'react';
+import { useHistory, Link } from 'react-router-dom';
+import { unwrapResult } from '@reduxjs/toolkit';
+import { Button, Form, Input, Checkbox, Alert } from 'antd';
+import { UserOutlined, LockOutlined, LoadingOutlined } from '@ant-design/icons';
 // source
 import { Container, Logo, Header, Navigator, Label } from './component';
 import { login } from 'src/app/feature/user';
+import { useAppDispatch } from 'src/app/store';
+// type
+type AsyncStatus = 'idle' | 'pending' | 'fulfilled' | 'rejected';
+interface AntdAlertOptions {
+    type: 'success' | 'info' | 'warning' | 'error';
+    message: React.ReactNode;
+}
 // component
 export function Login() {
-    const dispatch = useDispatch();
-    // 2021.01.21 TODO login 요청을 대기하면서, 로그인 실패 시 적절한 오류 메세지를 UI 에 표시하자.
+    const [status, setStatus] = useState<AsyncStatus>('idle');
+    const [error, setError] = useState<AntdAlertOptions>({ type: 'success', message: ''});
+
+    const dispatch = useAppDispatch();
+    const history = useHistory();
+
     const onFinish = async ({email, password, isStaySignedIn } : LoginRequest) => {
-        const resultAction = await dispatch(login({email, password, isStaySignedIn}));
+        try {
+            setStatus('pending');
+            const resultAction = await dispatch(login({email, password, isStaySignedIn}));
+            const user = unwrapResult(resultAction);
+
+            if (user.id) {
+                history.push('/board');
+            }
+            else {
+                setError({ type: 'warning', message: 'Incorrect email address and / or password.' });
+                setStatus('rejected');
+            }
+        } catch (error) {
+            setError({ type: 'error', message: 'Error occured. please contact administrator.' });
+            setStatus('rejected');
+        }
     };
 
     return(
@@ -30,7 +56,8 @@ export function Login() {
                 <Form.Item
                     name="email"
                     label={<Label>Email</Label>}
-                    rules={[{ required: true, message: 'Please input your email address.'}]}>
+                    validateTrigger='onSubmit'
+                    rules={[{ type: 'email', required: true, message: 'Please input your email address.'}]}>
                     <Input
                         size="large" 
                         prefix={<UserOutlined />}
@@ -39,12 +66,14 @@ export function Login() {
                 <Form.Item
                     name="password"
                     label={<Label>Password</Label>}
+                    validateTrigger='onSubmit'
                     rules={[{ required:true, message: 'Please input your password.'}]}>
                     <Input.Password 
                         size="large" 
                         prefix={<LockOutlined />}
                         placeholder="Enter password" />
                 </Form.Item>
+                {status === 'rejected' && <Alert style={{ marginBottom: '10px' }} type={error.type} message={error.message} showIcon closable />}
                 <Form.Item
                     name="isStaySignedIn"
                     valuePropName="checked">
@@ -58,10 +87,10 @@ export function Login() {
                         type="primary"
                         size="large"
                         block={true}>
-                        Sign in
+                        Sign in {status === 'pending' && <LoadingOutlined style={{ fontSize: '16px' }} /> }
                     </Button>
                 </Form.Item>
-                <Link to="/user/recovery" style={{ float: 'right'}}>Forgot password?</Link>
+                <Link to="/user/recovery" style={{ display: 'inline', float: 'right'}}>Forgot password?</Link>
             </Form>
         </Container>
     )

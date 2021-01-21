@@ -19,6 +19,8 @@ declare global {
         id : number | null;
         email : string | null;
     }
+
+
 }
 
 
