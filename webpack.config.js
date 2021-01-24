@@ -1,4 +1,5 @@
 // Paths
+const webpack = require('webpack');
 const path = require("path");
 const srcPath = path.join(__dirname, "src");
 const distPath = path.join(__dirname, "dist");
@@ -11,13 +12,15 @@ const ImageMinimizerPlugin = require("image-minimizer-webpack-plugin");
 const CopyPlugin = require("copy-webpack-plugin");
 const ForkTsCheckerWebpackPlugin = require("fork-ts-checker-webpack-plugin");
 const { TsconfigPathsPlugin } = require("tsconfig-paths-webpack-plugin");
+const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin');
 
 // Modules
+const isDevelopment = process.env.NODE_ENV !== 'production';
 module.exports = {
   // https://github.com/webpack/webpack-dev-server/issues/2758
   target: "web",
-  mode: "development",
-  entry: ["react-hot-loader/patch", path.join(srcPath, "index.tsx")],
+  mode: isDevelopment ? "development" : "production",
+  entry: [path.join(srcPath, "index.tsx")],
   output: {
     path: distPath,
     filename: "bundle.js",
@@ -28,7 +31,16 @@ module.exports = {
       {
         test: /\.(j|t)sx?$/,
         exclude: /node_modules/,
-        use: ["babel-loader"],
+        use: [
+          {
+            loader: require.resolve("babel-loader"),
+            options: {
+              plugins: [
+                isDevelopment && require.resolve('react-refresh/babel'),
+              ].filter(Boolean),
+            },
+          }
+        ],
       },
       // Style
       {
@@ -50,11 +62,7 @@ module.exports = {
     ],
   },
   resolve: {
-    // options for resolving module requests (does not apply to resolving of loaders)
     extensions: [".tsx", ".ts", ".jsx", ".js"],
-    alias: {
-      "react-dom": "@hot-loader/react-dom",
-    },
     plugins: [new TsconfigPathsPlugin()]
   },
   devtool: "inline-source-map",
@@ -93,5 +101,7 @@ module.exports = {
       },
     }),
     new ForkTsCheckerWebpackPlugin(),
-  ],
+    isDevelopment && new webpack.HotModuleReplacementPlugin(),
+    isDevelopment && new ReactRefreshWebpackPlugin(),
+  ].filter(Boolean),
 };

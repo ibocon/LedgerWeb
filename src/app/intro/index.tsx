@@ -1,6 +1,7 @@
 // module
 import React from 'react';
 import styled from 'styled-components';
+// [LEDGER-121] https://github.com/ant-design/ant-design/issues/26136
 import { Layout, Menu } from 'antd';
 // source
 import { Container } from 'src/app/component';
@@ -32,17 +33,15 @@ const StyledContent = styled(Layout.Content)`
     background-color: #ffffff;
 `;
 // component
-export function IntroPage(props : BasicRouteComponentProps) {
-    const { history, location, match, staticContext, ...others } = props;
-
+export function IntroPage() {
     return(
         <Layout>
             <StyledHeader>
                 <Container>
                     <StyledLogo />
                     <Menu theme="dark" mode="horizontal">
-                        <IntroMenu {...others} />
-                        <UserMenu {...others} />
+                        <IntroMenu />
+                        <UserMenu />
                     </Menu>
                 </Container>
             </StyledHeader>

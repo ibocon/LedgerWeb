@@ -9,12 +9,8 @@ const StyledHeader = styled(Layout.Header)`
     padding: 0;
     background: #ffffff;
 `;
-// type
-type HeaderProps = {
-
-}
 // component
-export function Header(props : HeaderProps) {
+export function Header() {
   return (
     <StyledHeader>
         <CollapseMenu />

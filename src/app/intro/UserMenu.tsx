@@ -4,12 +4,8 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 // source
 import { BreakPoint } from 'src/app/component';
-// type
-export type UserMenuProps = {
-
-}
 // component
-export function UserMenu(props : UserMenuProps) {
+export function UserMenu(props : {}) {
     const [collapsed, setCollapsed] = useState(false);
 
     useEffect(() => {

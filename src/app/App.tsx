@@ -1,5 +1,4 @@
 // module
-import { hot } from 'react-hot-loader/root';
 import React from 'react';
 import { Redirect, Route, Switch } from 'react-router-dom';
 import { Layout } from 'antd';
@@ -9,12 +8,8 @@ import { BoardPage } from './board';
 import { UserPage } from './user';
 // style
 import 'antd/dist/antd.css';
-// type
-export type AppProps = {
-
-}
 // component
-function AppComponent (props : AppProps) {
+export function App() {
   return(
     <Layout style={{ minHeight: '100vh' }} >
       <Switch>
@@ -26,6 +21,4 @@ function AppComponent (props : AppProps) {
   </Layout>
   );
 }
-
-export const App = hot(AppComponent);
 export default App;

@@ -4,12 +4,8 @@ import { Menu } from 'antd';
 import { AppstoreOutlined, DesktopOutlined } from '@ant-design/icons';
 // source
 import { BreakPoint } from 'src/app/component';
-// type
-export type IntroMenuProps = {
-
-}
 // component
-export function IntroMenu(props : IntroMenuProps) {
+export function IntroMenu(props : {}) {
     const [collapsed, setCollapsed] = useState(false);
 
     useEffect(() => {
