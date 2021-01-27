@@ -11,7 +11,7 @@ export const mockServer = ({ environment = 'test' }) => {
 
     createServer({
         environment,
-        // model
+        // data
         models: {
             user: Model,
             confirm: Model,
@@ -27,19 +27,16 @@ export const mockServer = ({ environment = 'test' }) => {
             this.namespace = "api";
             this.post('/user/login', (schema, request) => {
                 const requestUser = JSON.parse(request.requestBody);
-                // let responseUser = { id: null, email: null };
-                // if(requestUser.email === "admin@gmail.com" && requestUser.password === "qwerty" ) {
-                //     responseUser.id = 1;
-                //     responseUser.email = "admin@gmail.com"
-                // }
-                // 2021.01.21 TODO responseUser 가 null 인 원인을 찾자.
-                const responseUser = schema.users.find((user) => {
-                    return user.email === requestUser.email && user.password === requestUser.password;
-                });
-                if(responseUser)
-                    return new Response(200, { }, { id: responseUser.id, email: responseUser.email, token: token });
+                const responseUser = schema.users.findBy({ email: requestUser.email, password: requestUser.password});
+
+                if(responseUser) {
+                    if(responseUser.confirmed)
+                        return new Response(200, { }, { id: responseUser.id, email: responseUser.email, token: token });
+                    else
+                        return new Response(401, { }, { error: { message: `Email "${requestUser.email}" is not confrimed yet.` }});
+                }
                 else
-                    return new Response(401, { }, { error: { message: "login fail." }});
+                    return new Response(401, { }, { error: { message: 'Incorrect email address and / or password.' }});
             });
 
             this.get('/user/confirm', (schema, request) => {

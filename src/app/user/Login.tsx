@@ -6,8 +6,9 @@ import { Button, Form, Input, Checkbox, Alert } from 'antd';
 import { UserOutlined, LockOutlined, LoadingOutlined } from '@ant-design/icons';
 // source
 import { Container, Logo, Header, Navigator, Label } from './component';
-import { login } from 'src/app/feature/user';
+import { login } from 'src/app/feature';
 import { useAppDispatch } from 'src/app/store';
+import { isFail, isUserModel } from 'src/app/component';
 // type
 type AsyncStatus = 'idle' | 'pending' | 'fulfilled' | 'rejected';
 interface AntdAlertOptions {
@@ -25,15 +26,15 @@ export function Login() {
     const onFinish = async ({email, password, isStaySignedIn } : LoginRequest) => {
         try {
             setStatus('pending');
-            const resultAction = await dispatch(login({email, password, isStaySignedIn}));
-            const user = unwrapResult(resultAction);
-
-            if (user.id) {
+            const result = unwrapResult(await dispatch(login({email, password, isStaySignedIn})));
+            if(isUserModel(result)) {
                 history.push('/board');
+            } else if (isFail(result)) {
+                setError({ type: 'warning', message: `Login failed. ${result.error.message}` });
+                setStatus('rejected');
             }
             else {
-                setError({ type: 'warning', message: 'Incorrect email address and / or password.' });
-                setStatus('rejected');
+                throw Error('Something went wrong...');
             }
         } catch (error) {
             setError({ type: 'error', message: 'Error occured. please contact administrator.' });

@@ -1,14 +1,9 @@
-// Type definitions for Ledger 0.1.0
-// Project: Ledger
-// Definitions by: Yegun Kim <ibocon.tistory.com>
-
 import { StaticContext } from 'react-router';
 import { RouteComponentProps } from "react-router-dom";
 import { LocationState } from 'history';
 
 declare global {
-    interface BasicParams {}
-    interface BasicRouteComponentProps extends RouteComponentProps<BasicParams, StaticContext, LocationState> {}
+    interface BasicRouteComponentProps extends RouteComponentProps<{}, StaticContext, LocationState> {}
     
     interface LoginRequest {
         email: string;
@@ -19,8 +14,9 @@ declare global {
         id : number | null;
         email : string | null;
     }
-
-
+    interface Fail {
+        error : {
+            message : string;
+        }
+    }
 }
-
-
