@@ -1,8 +1,7 @@
 // module
 import axios from 'axios';
 // source
-import { isFail } from 'src/app/component';
-import client from './client';
+import client, { FailResponse, isFailResponse } from './client';
 import token from './token';
 // type
 interface UserResponse {
@@ -20,17 +19,6 @@ const isUserResponse = (response : any) : response is UserResponse => {
                 && typeof response.data.email === "string"
                 && typeof response.data.token === "string"
             ); 
-        }
-    }
-    return false;
-}
-interface FailResponse {
-    data : Fail
-}
-const isFailResponse = (response : any) : response is FailResponse => {
-    if("data" in response) {
-        if(isFail(response.data)) {
-           return true;
         }
     }
     return false;
