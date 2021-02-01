@@ -20,6 +20,20 @@ export enum BreakPoint {
     XXLarge = 1400
 }
 // method
+export function DecideBreakPoint(width : number) : BreakPoint {
+    if(width < BreakPoint.Small)
+        return BreakPoint.XSmall;
+    else if(width < BreakPoint.Medium)
+        return BreakPoint.Small;
+    else if(width < BreakPoint.Large)
+        return BreakPoint.Medium;
+    else if(width < BreakPoint.XLarge)
+        return BreakPoint.Large;
+    else if(width < BreakPoint.XXLarge)
+        return BreakPoint.XLarge;
+    else
+        return BreakPoint.XXLarge;
+}
 export function BreakPointLengthString(breakPoint : BreakPoint) : string {
     return `${breakPoint}px`;
 }

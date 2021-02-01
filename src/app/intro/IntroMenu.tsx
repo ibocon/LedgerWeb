@@ -14,28 +14,17 @@ export function IntroMenu(props : {}) {
     });
 
     function onResized() {
-        if(window.innerWidth < BreakPoint.Small)
+        if(window.innerWidth < BreakPoint.Medium)
             setCollapsed(true);
         else
             setCollapsed(false);
     }
-
-    const IntroMenuItems = (
+    return (
         <React.Fragment>
-            <Menu.Item {...props} icon={<AppstoreOutlined />}>Features</Menu.Item>
-            <Menu.Item {...props} icon={<DesktopOutlined />}>Updates</Menu.Item>
+            {!collapsed && <Menu.Item {...props} icon={<AppstoreOutlined />}>Features</Menu.Item> }
+            {!collapsed && <Menu.Item {...props} icon={<DesktopOutlined />}>Updates</Menu.Item> }
         </React.Fragment>
     );
-
-    if (collapsed) {
-        return (
-            <Menu.SubMenu title="Introduction">
-                {IntroMenuItems}
-            </Menu.SubMenu>
-        );
-    } else {
-        return IntroMenuItems;
-    }
 }
 export default IntroMenu;
 // https://stackoverflow.com/questions/50573609/fail-creating-a-submenu-in-a-component-with-antd
