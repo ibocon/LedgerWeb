@@ -7,7 +7,7 @@ import { Layout, Menu } from 'antd';
 import { MenuInfo } from 'rc-menu/lib/interface';
 import { AppstoreOutlined, BookOutlined, DesktopOutlined } from '@ant-design/icons';
 // source
-import { BreakPoint, Container, DecideBreakPoint } from 'src/app/component';
+import { BreakPointType, Container, DecideBreakPoint, IsMediumBreakPoint, IsSmallBreakPoint } from 'src/app/component';
 // type
 enum MenuKey {
     ledger = 'ledger',
@@ -42,7 +42,7 @@ const StyledContent = styled(Layout.Content)`
 // component
 export function IntroPage() {
     const [menuKey, setMenuKey] = useState<MenuKey>(MenuKey.ledger);
-    const [breakPoint, setBreakPoint] = useState<BreakPoint>(BreakPoint.Large);
+    const [breakWidth, setBreakWidth] = useState<BreakPointType>(BreakPointType.Large);
 
     useEffect(() => {
         window.addEventListener("resize", onResized);
@@ -51,8 +51,8 @@ export function IntroPage() {
 
     const onResized = () => {
         const newBreakPoint = DecideBreakPoint(window.innerWidth);
-        setBreakPoint(newBreakPoint);
-        if(newBreakPoint === BreakPoint.XSmall) {
+        setBreakWidth(newBreakPoint);
+        if(newBreakPoint === BreakPointType.XSmall) {
             setMenuKey(MenuKey.ledger);
         }
     };
@@ -69,19 +69,19 @@ export function IntroPage() {
             <Menu.Item 
                 key={MenuKey.ledger} 
                 icon={<BookOutlined />} 
-                style={{ float: 'right' }}>
+                style={{ float: 'left' }}>
                     Ledger
             </Menu.Item>
             <Menu.Item 
                 key={MenuKey.feature} 
                 icon={<AppstoreOutlined />} 
-                style={{ float: 'right' }}>
+                style={{ float: 'left' }}>
                 Features
             </Menu.Item>
             <Menu.Item 
                 key={MenuKey.update} 
                 icon={<DesktopOutlined />} 
-                style={{ float: 'right' }}>
+                style={{ float: 'left' }}>
                 Updates
             </Menu.Item>
         </React.Fragment>
@@ -96,19 +96,18 @@ export function IntroPage() {
                         theme="dark" 
                         mode="horizontal" 
                         defaultSelectedKeys={[menuKey]} 
-                        selectedKeys={[menuKey]} 
-                        collapsedWidth={BreakPoint.Small}
+                        selectedKeys={[menuKey]}
                         onClick={onMenuClick}>
-                        <Menu.Item><Link to="/user/signup">Signup</Link></Menu.Item>
-                        <Menu.Item><Link to="/user/login">Login</Link></Menu.Item>
-                        {breakPoint === BreakPoint.Small &&
-                            <Menu.SubMenu title="Menus" style={{ float: 'right'}}>
+                        {IsSmallBreakPoint(breakWidth) &&
+                            <Menu.SubMenu title="Menus" style={{ float: 'left'}}>
                                 { Menus }
                             </Menu.SubMenu>
                         }
-                        {(breakPoint === BreakPoint.Medium || breakPoint === BreakPoint.Large) &&
+                        {BreakPointType.Medium <= breakWidth &&
                             Menus
                         }
+                        <Menu.Item style={{ float: 'right' }}><Link to="/user/login">Login</Link></Menu.Item>
+                        <Menu.Item style={{ float: 'right' }}><Link to="/user/signup">Signup</Link></Menu.Item>
                     </Menu>
                 </Container>
             </StyledHeader>

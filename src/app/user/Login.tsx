@@ -10,11 +10,6 @@ import { login } from 'src/app/feature';
 import { useAppDispatch } from 'src/app/store';
 import { isFail, isUserModel } from 'src/app/component';
 // type
-type AsyncStatus = 'idle' | 'pending' | 'fulfilled' | 'rejected';
-interface AntdAlertOptions {
-    type: 'success' | 'info' | 'warning' | 'error';
-    message: React.ReactNode;
-}
 // component
 export function Login() {
     const [status, setStatus] = useState<AsyncStatus>('idle');
@@ -36,6 +31,7 @@ export function Login() {
             else {
                 throw Error('Something went wrong...');
             }
+            setStatus('fulfilled');
         } catch (error) {
             setError({ type: 'error', message: 'Error occured. please contact administrator.' });
             setStatus('rejected');

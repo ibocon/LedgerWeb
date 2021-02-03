@@ -25,6 +25,15 @@ export const login = createAsyncThunk<UserState | Fail, LoginRequest>(
 
         return response;
     });
+export const signup = createAsyncThunk<UserState | Fail, SignupRequest>(
+    `${name}/signup`,
+    async (args : SignupRequest) : Promise<UserState | Fail> => {
+        const response = await UserService.signup({
+            email: args.email,
+            password: args.password
+        });
+        return response;
+    });
 // selector
 export const selectEmail = (state : UserState) => state.email;
 // slice

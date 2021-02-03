@@ -4,7 +4,7 @@ import { Switch, Route } from 'react-router-dom';
 import styled from 'styled-components';
 import { Layout } from 'antd';
 // source
-import { BreakPoint } from 'src/app/component/styled';
+import { BreakPointType } from 'src/app/component';
 import { Login } from './Login';
 import { Signup } from './Signup';
 import { Recovery } from './Recovery';
@@ -14,14 +14,14 @@ const VerticalContainer = styled(Layout)`
     display: flex;
     flex-direction: row;
     align-items: center;
-    @media(max-width: ${BreakPoint.Small}px) {
+    @media(max-width: ${BreakPointType.Small}px) {
         justify-content: flex-start;
         align-items: flex-start;
     }
 `;
 const Bumper = styled.div`
     min-height: 30px;
-    @media(max-width: ${BreakPoint.Small}px) {
+    @media(max-width: ${BreakPointType.Small}px) {
         display: none;
     }
 `;

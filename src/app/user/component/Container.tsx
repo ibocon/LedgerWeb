@@ -3,7 +3,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { Layout } from 'antd';
 // source
-import { BreakPoint } from 'src/app/component/styled';
+import { BreakPointType } from 'src/app/component';
 // style
 const StyledLayout = styled(Layout)`
     // layout
@@ -11,7 +11,7 @@ const StyledLayout = styled(Layout)`
     flex-direction: column;
     align-items: stretch;
     min-width: 300px;
-    width: ${BreakPoint.Small}px;
+    width: ${BreakPointType.Small}px;
     min-height: 600px;
     // padding
     padding-top: 48px;
@@ -25,7 +25,7 @@ const StyledLayout = styled(Layout)`
     // background
     background-color: rgb(255,255,255);
     // media
-    @media(max-width: ${BreakPoint.Small}px) {
+    @media(max-width: ${BreakPointType.Small}px) {
         width: 100vw;
         height: 100vh;
         align-items: stretch;

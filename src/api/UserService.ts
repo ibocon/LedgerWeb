@@ -47,12 +47,29 @@ export const UserService = {
             return { error: { message: 'server response is not correctly formatted.' } };
         } catch(error) {
             token.clear();
-            if(axios.isAxiosError(error)) {
-                if(isFailResponse(error.response)) {
+            if(axios.isAxiosError(error))
+                if(isFailResponse(error.response))
                     return error.response.data;
-                }
+            throw error;
+        }
+    },
+    signup: async (request : SignupRequest): Promise<UserModel | Fail> => {
+        try{
+            const response = await client.post<UserResponse | FailResponse>(`/api/user/signup`, {
+                email: request.email,
+                password: request.password,
+            });
+            if(isUserResponse(response)) {
+                return { id: parseInt(response.data.id), email: response.data.email };
+            } 
+            if(isFailResponse(response)) {
+                return response.data;
             }
-
+            return { error: { message: 'server response is not correctly formatted.' } };
+        } catch(error) {
+            if(axios.isAxiosError(error))
+                if(isFailResponse(error.response))
+                    return error.response.data;
             throw error;
         }
     }
