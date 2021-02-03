@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { unwrapResult } from '@reduxjs/toolkit';
 import { Button, Form, Input, Alert } from 'antd';
-import { UserOutlined, LockOutlined } from '@ant-design/icons';
+import { UserOutlined, LockOutlined, LoadingOutlined } from '@ant-design/icons';
 // source
 import { Container, Logo, Header, Navigator, Label } from './component';
 import { signup } from 'src/app/feature';
@@ -39,6 +39,7 @@ export function Signup() {
                 <Form.Item
                     name="email"
                     label={<Label>Email</Label>}
+                    validateTrigger='onBlur'
                     rules={[{
                         type: 'email',
                         message: 'The input is not valid email address.',
@@ -53,8 +54,22 @@ export function Signup() {
                 <Form.Item
                     name="password"
                     label={<Label>Password</Label>}
+                    validateTrigger='onBlur'
                     hasFeedback
-                    rules={[{ required:true, message: 'Please input your password.'}]}>
+                    rules={[
+                        () => ({
+                            validator(_, value : string) {
+                                if(value.length < 8)
+                                    // https://owasp.org/www-community/password-special-characters
+                                    return Promise.reject("Password length must be at least 8 characters");
+                                if(value.match(/[ !"#$%&'()*+,-./:<;=?>@[\\^\]_`{|}~]/) === null)
+                                    return Promise.reject("Password must include at least 1 special character");
+                                if(value.match(/[0-9]/) === null)
+                                    return Promise.reject("Password must include at least 1 number character");
+
+                                return Promise.resolve();
+                            }
+                        })]}>
                     <Input.Password 
                         size="large" 
                         prefix={<LockOutlined />}
@@ -74,6 +89,7 @@ export function Signup() {
                           validator(_, value) {
                             if (!value || getFieldValue('password') === value)
                               return Promise.resolve();
+
                             return Promise.reject('The two passwords that you entered do not match.');
                           },
                         }),
@@ -85,11 +101,12 @@ export function Signup() {
                 </Form.Item>
                 {status === 'rejected' && <Alert style={{ marginBottom: '10px' }} type={error.type} message={error.message} showIcon closable />}
                 <Form.Item>
-                    <Button
+                    <Button 
+                        htmlType="submit"
                         type="primary"
                         size="large"
                         block={true}>
-                        Sign Up
+                        Sign Up {status === 'pending' && <LoadingOutlined style={{ fontSize: '16px' }} /> }
                     </Button>
                 </Form.Item>
             </Form>

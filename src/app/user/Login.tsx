@@ -53,7 +53,7 @@ export function Login() {
                 <Form.Item
                     name="email"
                     label={<Label>Email</Label>}
-                    validateTrigger='onSubmit'
+                    validateTrigger='onBlur'
                     rules={[{ type: 'email', required: true, message: 'Please input your email address.'}]}>
                     <Input
                         size="large" 
