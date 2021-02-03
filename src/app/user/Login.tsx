@@ -44,7 +44,7 @@ export function Login() {
             <Header>Login</Header>
             <Navigator 
                 text="Have not account yet?" 
-                link={<Link to="/user/signup">Sign Up</Link>} />
+                link={<Link to="/user/signup" tabIndex={-1}>Sign Up</Link>} />
             <Form
                 layout="vertical"
                 requiredMark={false}
@@ -58,7 +58,8 @@ export function Login() {
                     <Input
                         size="large" 
                         prefix={<UserOutlined />}
-                        placeholder="Enter email" />
+                        placeholder="Enter email"
+                        tabIndex={1} />
                 </Form.Item>
                 <Form.Item
                     name="password"
@@ -68,13 +69,14 @@ export function Login() {
                     <Input.Password 
                         size="large" 
                         prefix={<LockOutlined />}
-                        placeholder="Enter password" />
+                        placeholder="Enter password"
+                        tabIndex={2} />
                 </Form.Item>
                 {status === 'rejected' && <Alert style={{ marginBottom: '10px' }} type={error.type} message={error.message} showIcon closable />}
                 <Form.Item 
                     name="isStaySignedIn"
                     valuePropName="checked">
-                    <Checkbox>
+                    <Checkbox tabIndex={-1}>
                         Stay signed in
                     </Checkbox>
                 </Form.Item>
@@ -83,11 +85,12 @@ export function Login() {
                         htmlType="submit"
                         type="primary"
                         size="large"
-                        block={true}>
+                        block={true}
+                        tabIndex={3}>
                         Sign in {status === 'pending' && <LoadingOutlined style={{ fontSize: '16px' }} /> }
                     </Button>
                 </Form.Item>
-                <Link to="/user/recovery" style={{ display: 'inline', float: 'right'}}>Forgot password?</Link>
+                <Link to="/user/recovery" tabIndex={-1} style={{ display: 'inline', float: 'right'}}>Forgot password?</Link>
             </Form>
         </Container>
     )

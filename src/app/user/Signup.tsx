@@ -42,7 +42,7 @@ export function Signup() {
             <Header>Sign Up</Header>
             <Navigator 
                 text="Already have an account?" 
-                link={<Link to="/user/login">Login</Link>} />
+                link={<Link to="/user/login" tabIndex={-1}>Login</Link>} />
             <Form
                 layout="vertical"
                 requiredMark={false}
@@ -60,7 +60,8 @@ export function Signup() {
                     <Input
                         size="large"
                         prefix={<UserOutlined />}
-                        placeholder="Enter email" />
+                        placeholder="Enter email"
+                        tabIndex={1} />
                 </Form.Item>
                 <Form.Item
                     name="password"
@@ -84,7 +85,8 @@ export function Signup() {
                     <Input.Password 
                         size="large" 
                         prefix={<LockOutlined />}
-                        placeholder="Enter password" />
+                        placeholder="Enter password"
+                        tabIndex={2} />
                 </Form.Item>
                 <Form.Item
                     name="confirmPassword"
@@ -108,7 +110,8 @@ export function Signup() {
                     <Input.Password 
                         size="large" 
                         prefix={<LockOutlined />}
-                        placeholder="Confirm password" />
+                        placeholder="Confirm password"
+                        tabIndex={3} />
                 </Form.Item>
                 {status === 'rejected' && <Alert style={{ marginBottom: '10px' }} type={error.type} message={error.message} showIcon closable />}
                 <Form.Item>
@@ -116,7 +119,8 @@ export function Signup() {
                         htmlType="submit"
                         type="primary"
                         size="large"
-                        block={true}>
+                        block={true}
+                        tabIndex={4}>
                         Sign Up {status === 'pending' && <LoadingOutlined style={{ fontSize: '16px' }} /> }
                     </Button>
                 </Form.Item>
