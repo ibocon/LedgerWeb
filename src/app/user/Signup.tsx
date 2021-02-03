@@ -2,13 +2,14 @@
 import React, { useState } from 'react';
 import { useHistory, Link } from 'react-router-dom';
 import { unwrapResult } from '@reduxjs/toolkit';
-import { Button, Form, Input, Alert } from 'antd';
+import { Button, Form, Input, Alert, Result } from 'antd';
 import { UserOutlined, LockOutlined, LoadingOutlined } from '@ant-design/icons';
 // source
 import { Container, Logo, Header, Navigator, Label } from './component';
 import { signup } from 'src/app/feature';
 import { useAppDispatch } from 'src/app/store';
 import { isUserModel, isFail } from 'src/app/component';
+import { stat } from 'fs';
 // component
 export function Signup() {
     const [status, setStatus] = useState<AsyncStatus>('idle');
@@ -22,7 +23,6 @@ export function Signup() {
             setStatus('pending');
             const result = unwrapResult(await dispatch(signup({email, password})));
             if(isUserModel(result)) {
-                history.push('/user/login');
                 setStatus('fulfilled');
             } else if (isFail(result)) {
                 setError({ type: 'warning', message: `${result.error.message}` });
@@ -36,10 +36,8 @@ export function Signup() {
         }
     };
 
-    return(
-        <Container>
-            <Logo />
-            <Header>Sign Up</Header>
+    const form = (
+        <React.Fragment>
             <Navigator 
                 text="Already have an account?" 
                 link={<Link to="/user/login" tabIndex={-1}>Login</Link>} />
@@ -95,18 +93,18 @@ export function Signup() {
                     hasFeedback
                     rules={[
                         {
-                          required: true,
-                          message: 'Please confirm your password.',
+                        required: true,
+                        message: 'Please confirm your password.',
                         },
                         ({ getFieldValue }) => ({
-                          validator(_, value) {
+                        validator(_, value) {
                             if (!value || getFieldValue('password') === value)
-                              return Promise.resolve();
+                            return Promise.resolve();
 
                             return Promise.reject('The two passwords that you entered do not match.');
-                          },
+                        },
                         }),
-                      ]}>
+                    ]}>
                     <Input.Password 
                         size="large" 
                         prefix={<LockOutlined />}
@@ -119,12 +117,39 @@ export function Signup() {
                         htmlType="submit"
                         type="primary"
                         size="large"
-                        block={true}
+                        block
                         tabIndex={4}>
                         Sign Up {status === 'pending' && <LoadingOutlined style={{ fontSize: '16px' }} /> }
                     </Button>
                 </Form.Item>
             </Form>
+        </React.Fragment>
+    );
+
+    const result = (
+        <Result 
+            status="success"
+            title="Confirm your email to continue login."
+            extra={<Button onClick={() => history.push('/user/login')}>Login</Button>} />
+    );
+
+    let content = <React.Fragment />;
+    switch(status){
+        case 'idle':
+        case 'pending':
+        case 'rejected':
+            content = form;
+            break;
+        case 'fulfilled':
+            content = result;
+            break;
+    }
+
+    return(
+        <Container>
+            <Logo />
+            <Header>Sign Up</Header>
+            {content}
         </Container>
     );
 }
