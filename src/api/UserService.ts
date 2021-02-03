@@ -4,14 +4,31 @@ import axios from 'axios';
 import client, { FailResponse, isFailResponse } from './client';
 import token from './token';
 // type
-interface UserResponse {
+interface SignupResponse {
+    data : {
+        id : string;
+        email : string;
+    }
+}
+const isSignupResponse = (response : any) : response is SignupResponse => {
+    if("data" in response) {
+        if( "id" && "email" in response.data) {
+            return (
+                typeof response.data.id === "string"
+                && typeof response.data.email === "string"
+            ); 
+        }
+    }
+    return false;
+}
+interface LoginResponse {
     data : {
         id : string;
         email : string;
         token : string;
     }
 }
-const isUserResponse = (response : any) : response is UserResponse => {
+const isLoginResponse = (response : any) : response is LoginResponse => {
     if("data" in response) {
         if( "id" && "email" && "token" in response.data) {
             return (
@@ -33,11 +50,11 @@ export const UserService = {
     },
     login: async (request : LoginRequest): Promise<UserModel | Fail> => {
         try{
-            const response = await client.post<UserResponse | FailResponse>(`/api/user/login`, {
+            const response = await client.post<LoginResponse | FailResponse>(`/api/user/login`, {
                 email: request.email,
                 password: request.password,
             });
-            if(isUserResponse(response)) {
+            if(isLoginResponse(response)) {
                 token.set(response.data.token, request.isStaySignedIn);
                 return { id: parseInt(response.data.id), email: response.data.email };
             } 
@@ -55,11 +72,11 @@ export const UserService = {
     },
     signup: async (request : SignupRequest): Promise<UserModel | Fail> => {
         try{
-            const response = await client.post<UserResponse | FailResponse>(`/api/user/signup`, {
+            const response = await client.post<SignupResponse | FailResponse>(`/api/user/signup`, {
                 email: request.email,
                 password: request.password,
             });
-            if(isUserResponse(response)) {
+            if(isSignupResponse(response)) {
                 return { id: parseInt(response.data.id), email: response.data.email };
             } 
             if(isFailResponse(response)) {

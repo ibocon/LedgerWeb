@@ -1,6 +1,6 @@
 // module
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { useHistory, Link } from 'react-router-dom';
 import { unwrapResult } from '@reduxjs/toolkit';
 import { Button, Form, Input, Alert } from 'antd';
 import { UserOutlined, LockOutlined, LoadingOutlined } from '@ant-design/icons';
@@ -8,20 +8,31 @@ import { UserOutlined, LockOutlined, LoadingOutlined } from '@ant-design/icons';
 import { Container, Logo, Header, Navigator, Label } from './component';
 import { signup } from 'src/app/feature';
 import { useAppDispatch } from 'src/app/store';
+import { isUserModel, isFail } from 'src/app/component';
 // component
 export function Signup() {
     const [status, setStatus] = useState<AsyncStatus>('idle');
     const [error, setError] = useState<AntdAlertOptions>({ type: 'success', message: ''});
-    const dispatch = useAppDispatch();
 
-    // 2021.02.01 TODO 여기서부터 작업하자.
+    const dispatch = useAppDispatch();
+    const history = useHistory();
+
     const onFinish = async ({email, password} : {email: string, password: string, confirmPassword: string}) => {
         try {
             setStatus('pending');
             const result = unwrapResult(await dispatch(signup({email, password})));
-            setStatus('fulfilled');
+            if(isUserModel(result)) {
+                history.push('/user/login');
+                setStatus('fulfilled');
+            } else if (isFail(result)) {
+                setError({ type: 'warning', message: `${result.error.message}` });
+                setStatus('rejected');
+            } else {
+                throw Error('Something went wrong...');
+            }
         } catch(error) {
-            throw Error('Something went wrong...');
+            setError({ type: 'error', message: 'Error occured. please contact administrator.' });
+            setStatus('rejected');
         }
     };
 

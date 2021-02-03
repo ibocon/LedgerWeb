@@ -24,14 +24,14 @@ export function Login() {
             const result = unwrapResult(await dispatch(login({email, password, isStaySignedIn})));
             if(isUserModel(result)) {
                 history.push('/board');
+                setStatus('fulfilled');
             } else if (isFail(result)) {
-                setError({ type: 'warning', message: `Login failed. ${result.error.message}` });
+                setError({ type: 'warning', message: `${result.error.message}` });
                 setStatus('rejected');
             }
             else {
                 throw Error('Something went wrong...');
             }
-            setStatus('fulfilled');
         } catch (error) {
             setError({ type: 'error', message: 'Error occured. please contact administrator.' });
             setStatus('rejected');
@@ -71,7 +71,7 @@ export function Login() {
                         placeholder="Enter password" />
                 </Form.Item>
                 {status === 'rejected' && <Alert style={{ marginBottom: '10px' }} type={error.type} message={error.message} showIcon closable />}
-                <Form.Item
+                <Form.Item 
                     name="isStaySignedIn"
                     valuePropName="checked">
                     <Checkbox>
