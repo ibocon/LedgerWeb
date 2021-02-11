@@ -12,12 +12,11 @@ const StyledMenu = styled(Menu.Item)`
   font-size: 16px;
 `;
 // component
+let logoAlign : 'left' | 'center' = 'left';
+let logoIndent = 24;
+let logoWidth = 128;
 export function Sider(props : {}) {
   const sidebarCollapsed = useSelector(selectSidebarCollapsed);
-
-  let logoAlign : 'left' | 'center' = 'left';
-  let logoIndent = 24;
-  let logoWidth = 128;
   if(sidebarCollapsed) {
     logoAlign = 'center';
     logoIndent = 0;

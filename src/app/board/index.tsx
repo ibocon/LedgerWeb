@@ -3,21 +3,22 @@ import React from 'react';
 import { Layout } from 'antd';
 import styled from 'styled-components';
 // source
+import { BreakPointType } from 'src/app/component';
 import { Header } from './Header';
 import { Sider } from './Sider';
 // style
 const StyledContent = styled(Layout.Content)`
-    background-color: #ffffff;
-    margin: 24px 16px;
+    background-color: rgb(255,255,255);
+    margin: 24px 18px;
     padding: 24px;
-    min-height: 280px;
+    min-height: 600px;
 `;
 // component
 export function BoardPage(props : {}) {
     return(
-        <Layout>
+        <Layout style={{ minWidth: BreakPointType.Small}}>
             <Sider />
-            <Layout style={{ backgroundColor: '#ffffff' }}>
+            <Layout style={{ backgroundColor: 'rgb(235,235,235)' }}>
                 <Header />
                 <StyledContent>
                     
