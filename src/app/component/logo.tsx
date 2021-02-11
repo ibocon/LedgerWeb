@@ -10,7 +10,7 @@ const StyledLogo = styled.img`
     alt: "Ledger application's logo";
 `;
 // component
-export function Logo(props : { width?: number | string,  height?: number | string}) {
+export const Logo = (props : { width?: number | string,  height?: number | string}) => {
   return (
     <StyledLogo 
       src={logo} 

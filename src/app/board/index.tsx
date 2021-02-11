@@ -14,7 +14,7 @@ const StyledContent = styled(Layout.Content)`
     min-height: 600px;
 `;
 // component
-export function BoardPage(props : {}) {
+export function BoardPage() {
     return(
         <Layout style={{ minWidth: BreakPointType.Small}}>
             <Sider />

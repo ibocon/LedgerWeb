@@ -5,8 +5,6 @@ import { createServer, Response, Model } from 'miragejs';
 const generateToken = () => Math.random().toString(36).substr(2);
 // server
 export const mockServer = ({ environment = 'test' }) => {
-    const token = generateToken();
-
     createServer({
         environment,
         // data
@@ -15,8 +13,8 @@ export const mockServer = ({ environment = 'test' }) => {
             confirm: Model,
         },
         seeds(server) {
-            server.schema.create("user", { email: "admin@gmail.com", password: "qwerty", confirmed: true});
-            server.schema.create("user", { email: "confirm@gmail.com", password: "qwerty", confirmed: false});
+            server.schema.create("user", { email: "admin@gmail.com", password: "qwerty", confirmed: true, token: "LsieDODcolCTD"});
+            server.schema.create("user", { email: "confirm@gmail.com", password: "qwerty", confirmed: false, token: "EcoclXdCDsXf"});
             server.schema.create("confirm", {userId: 2, token: "ABCDEF"});
         },
         // route
@@ -27,10 +25,13 @@ export const mockServer = ({ environment = 'test' }) => {
                 const requestUser = JSON.parse(request.requestBody);
                 const responseUser = schema.users.findBy({ email: requestUser.email, password: requestUser.password});
                 if(responseUser)
-                    if(responseUser.confirmed)
+                    if(responseUser.confirmed) {
+                        const token = generateToken();
+                        responseUser.update( { token: token });
                         return new Response(200, { }, { id: responseUser.id, email: responseUser.email, token: token });
-                    else
+                    } else {
                         return new Response(401, { }, { error: { message: `Email "${requestUser.email}" is not confrimed yet.` }});
+                    }
                 else
                     return new Response(401, { }, { error: { message: 'Incorrect email address and / or password.' }});
             });
@@ -59,6 +60,20 @@ export const mockServer = ({ environment = 'test' }) => {
                     setTimeout(() => {axios.get(`/api/user/confirm?token=${confirmToken}`)}, (3 * 1000));
                     return new Response(201, {}, { id: responseUser.id, email: responseUser.email });
                 }
+            });
+
+            this.get('/user/:id', (schema, request) => {
+                const requestUserId = request.params.id;
+                const responseUser = schema.users.find(requestUserId);
+
+                if(responseUser === null)
+                    return new Response(401, {}, { error: { message: `Unauthorized.` }});
+
+                const requestAuthToken = request.requestHeaders.Authorization.replace('Bearer ','');
+                if(requestAuthToken !== responseUser.token)
+                    return new Response(401, {}, { error: { message: `Unauthorized.` }});
+                
+                return new Response(201, {}, { id: responseUser.id, email: responseUser.email });
             });
         },
     });

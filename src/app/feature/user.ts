@@ -1,7 +1,8 @@
 // module
 import { createSlice, createAsyncThunk, SliceCaseReducers } from '@reduxjs/toolkit';
-import { UserService } from 'src/api/UserService';
+import { UserService } from 'src/api/user';
 // source
+import { RootState } from 'src/app/store';
 import { isUserModel } from 'src/app/component';
 // type
 const name : string = "user";
@@ -14,6 +15,15 @@ function isUserState(state : any): state is UserState {
     }
 }
 // action
+export const getUser = createAsyncThunk<UserState | Fail, { id: number }>(
+    `${name}/get`, 
+    async (args : { id: number }) : Promise<UserState | Fail> => {
+        const response = await UserService.get({
+            id: args.id
+        });
+
+        return response;
+    });
 export const login = createAsyncThunk<UserState | Fail, LoginRequest>(
     `${name}/login`, 
     async (args : LoginRequest) : Promise<UserState | Fail> => {
@@ -35,7 +45,8 @@ export const signup = createAsyncThunk<UserState | Fail, SignupRequest>(
         return response;
     });
 // selector
-export const selectEmail = (state : UserState) => state.email;
+export const selectUserId = (state : RootState) : number | null => state.user.id;
+export const selectUserEmail = (state : RootState) : string | null => state.user.email;
 // slice
 export const userSlice = createSlice<UserState, SliceCaseReducers<UserState>>({
     name: name,
