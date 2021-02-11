@@ -12,15 +12,28 @@ const StyledMenu = styled(Menu.Item)`
   font-size: 16px;
 `;
 // component
-const menuIndent = 24;
 export function Sider(props : {}) {
   const sidebarCollapsed = useSelector(selectSidebarCollapsed);
+
+  let logoAlign : 'left' | 'center' = 'left';
+  let logoIndent = 24;
+  let logoWidth = 128;
+  if(sidebarCollapsed) {
+    logoAlign = 'center';
+    logoIndent = 0;
+    logoWidth = 50;
+  } else {
+    logoAlign = 'left';
+    logoIndent = 24;
+    logoWidth = 128;
+  }
+
   return (
     <Layout.Sider trigger={null} collapsible collapsed={sidebarCollapsed} width="260px">
-      <div style={{ marginTop: '12px', marginLeft: `${menuIndent}px` }}>
-        <Logo />
+      <div style={{ marginTop: '12px', marginLeft: `${logoIndent}px`, textAlign: logoAlign }}>
+        <Logo width={logoWidth} />
       </div>
-      <Menu theme="dark" mode="inline" defaultSelectedKeys={['1']} inlineIndent={menuIndent}>
+      <Menu theme="dark" mode="inline" defaultSelectedKeys={['1']}>
         <StyledMenu key="1" icon={<UserOutlined />}>
           History
         </StyledMenu>

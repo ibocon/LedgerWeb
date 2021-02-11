@@ -3,7 +3,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { Layout } from 'antd';
 // source
-import { CollapseMenu } from './CollapseMenu';
+import { SiderCollapseButton } from './SiderCollapseButton';
 // style
 const StyledHeader = styled(Layout.Header)`
     padding: 0;
@@ -13,7 +13,7 @@ const StyledHeader = styled(Layout.Header)`
 export function Header() {
   return (
     <StyledHeader>
-        <CollapseMenu />
+        <SiderCollapseButton />
     </StyledHeader>
   );
 };

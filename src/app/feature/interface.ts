@@ -1,13 +1,15 @@
 // module
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction, SliceCaseReducers } from '@reduxjs/toolkit';
+// source
+import { RootState } from 'src/app/store';
 // type
 type interfaceState = {
     sidebarCollapsed : boolean;
 };
 // selector
-export const selectSidebarCollapsed = (state : interfaceState) => state.sidebarCollapsed;
+export const selectSidebarCollapsed = (state : RootState) => state.interface.sidebarCollapsed;
 // slice
-export const interfaceSlice = createSlice({
+export const interfaceSlice = createSlice<interfaceState, SliceCaseReducers<interfaceState>>({
     name: 'interface',
     initialState: {
         sidebarCollapsed: false,

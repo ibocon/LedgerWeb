@@ -22,12 +22,8 @@ const StyledMenuUnfoldOutlined = styled(MenuUnfoldOutlined)`
 const StyledMenufoldOutlined = styled(MenuFoldOutlined)`
     ${menuStyle}
 `;
-// type
-type CollapseMenuProps = {
-
-}
 // component
-export function CollapseMenu(props : CollapseMenuProps) {
+export function SiderCollapseButton(props : {}) {
     const dispatch = useDispatch();
     const sidebarCollapsed = useSelector(selectSidebarCollapsed);
 
@@ -36,4 +32,4 @@ export function CollapseMenu(props : CollapseMenuProps) {
     else
         return <StyledMenuUnfoldOutlined onClick={ () => dispatch(switchSidebarCollapsed(true))} />
 }
-export default CollapseMenu;
+export default SiderCollapseButton;

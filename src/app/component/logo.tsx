@@ -10,9 +10,14 @@ const StyledLogo = styled.img`
     alt: "Ledger application's logo";
 `;
 // component
-export function Logo(props : {}) {
+export function Logo(props : { width?: number | string,  height?: number | string}) {
   return (
-    <StyledLogo src={logo} />
+    <StyledLogo 
+      src={logo} 
+      style={{ 
+        width: props.width,
+        height: props.height
+      }} />
   );
 };
 export default Logo;
