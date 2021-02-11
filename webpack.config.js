@@ -84,8 +84,6 @@ module.exports = {
       patterns: [
         { from: path.join(publicPath, "manifest.json"), to: distPath },
         { from: path.join(publicPath, "robots.txt"), to: distPath },
-        { from: path.join(publicPath, "logo192.png"), to: distPath },
-        { from: path.join(publicPath, "logo512.png"), to: distPath },
       ],
     }),
     new ImageMinimizerPlugin({

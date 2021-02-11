@@ -7,7 +7,12 @@ import { Layout, Menu } from 'antd';
 import { MenuInfo } from 'rc-menu/lib/interface';
 import { AppstoreOutlined, BookOutlined, DesktopOutlined } from '@ant-design/icons';
 // source
-import { BreakPointType, Container, DecideBreakPoint, IsMediumBreakPoint, IsSmallBreakPoint } from 'src/app/component';
+import {
+    Logo,
+    BreakPointType, 
+    Container, 
+    DecideBreakPoint, 
+    IsSmallBreakPoint } from 'src/app/component';
 // type
 enum MenuKey {
     ledger = 'ledger',
@@ -23,15 +28,6 @@ const StyledHeader = styled(Layout.Header)`
     width: 100vw;
     height: ${headerHeight}px;
     padding: 0px ${headerPadding}px;
-`;
-const logoHeight = 36;
-const logoMargin = (headerHeight - logoHeight) / 2;
-const StyledLogo = styled.div`
-    float: left;
-    width: 128px;
-    height: ${logoHeight}px;
-    margin: ${logoMargin}px 8px ${logoMargin}px 0px;
-    background-color: #bebebe;
 `;
 const contentPadding = headerPadding;
 const StyledContent = styled(Layout.Content)`
@@ -91,7 +87,9 @@ export function IntroPage() {
         <Layout>
             <StyledHeader>
                 <Container>
-                    <StyledLogo />
+                    <div style={{ float: 'left', margin: '0px 24px 0px 0px' }}>
+                        <Logo />
+                    </div>
                     <Menu 
                         theme="dark" 
                         mode="horizontal" 

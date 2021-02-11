@@ -9,7 +9,6 @@ import { Container, Logo, Header, Navigator, Label } from './component';
 import { signup } from 'src/app/feature';
 import { useAppDispatch } from 'src/app/store';
 import { isUserModel, isFail } from 'src/app/component';
-import { stat } from 'fs';
 // component
 export function Signup() {
     const [status, setStatus] = useState<AsyncStatus>('idle');

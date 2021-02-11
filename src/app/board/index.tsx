@@ -3,7 +3,8 @@ import React from 'react';
 import { Layout } from 'antd';
 import styled from 'styled-components';
 // source
-import { Header, Sider } from 'src/app/component';
+import { Header } from 'src/app/component';
+import { Sider } from './sidebar';
 // style
 const StyledContent = styled(Layout.Content)`
     background-color: #ffffff;
@@ -11,12 +12,8 @@ const StyledContent = styled(Layout.Content)`
     padding: 24px;
     min-height: 280px;
 `;
-// type
-export type BoardPageProps = { 
-
-}
 // component
-export function BoardPage(props : BoardPageProps) {
+export function BoardPage(props : {}) {
     return(
         <Layout>
             <Sider />
