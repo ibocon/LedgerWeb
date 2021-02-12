@@ -37,7 +37,9 @@ export const interfaceSlice = createSlice<InterfaceState, SliceCaseReducers<Inte
     },
     extraReducers: builder => {
         builder.addCase(logout.fulfilled, (state: InterfaceState) => {
-            state = intialState;
+            state.sidebarCollapsed = intialState.sidebarCollapsed;
+            state.notification.level = intialState.notification.level;
+            state.notification.message= intialState.notification.message;
         });
     }
 });

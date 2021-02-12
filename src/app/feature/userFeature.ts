@@ -65,14 +65,17 @@ export const userSlice = createSlice<UserState, SliceCaseReducers<UserState>>({
 
     },
     extraReducers: builder => {
-        builder.addCase(login.fulfilled, (state : UserState, { payload } : { payload : UserState | Fail}) => {
-            if(isUserState(payload)) {
-                state.id = payload.id;
-                state.email = payload.email;
-            }
-        }).addCase(logout.fulfilled, (state : UserState) => {
-            state = intialState;
-        });
+        builder
+            .addCase(login.fulfilled, (state : UserState, { payload } : { payload : UserState | Fail}) => {
+                if(isUserState(payload)) {
+                    state.id = payload.id;
+                    state.email = payload.email;
+                }
+            })
+            .addCase(logout.fulfilled, (state : UserState) => {
+                state.id = intialState.id;
+                state.email = intialState.email;
+            });
     }
 });
 // action

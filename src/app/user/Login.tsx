@@ -1,21 +1,26 @@
 // module
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useHistory, Link } from 'react-router-dom';
 import { unwrapResult } from '@reduxjs/toolkit';
 import { Button, Form, Input, Checkbox, Alert } from 'antd';
 import { UserOutlined, LockOutlined, LoadingOutlined } from '@ant-design/icons';
 // source
-import { useAppDispatch, login, selectNotification, notify } from 'src/app/feature';
+import { useAppDispatch, login, selectNotification, notify, selectUserId } from 'src/app/feature';
 import { isFail, isUserModel } from 'src/app/component';
 import { Container, Logo, Header, Navigator, Label } from './component';
-// type
 // component
 export function Login() {
     const history = useHistory();
     const dispatch = useAppDispatch();    
     const [status, setStatus] = useState<AsyncStatus>('idle');
+    const userId = useSelector(selectUserId);
     const notification = useSelector(selectNotification);
+
+    useEffect(() => {
+        if(userId)
+            history.push('/board');
+    },[history, userId]);
 
     const onFinish = async ({email, password, isStaySignedIn } : LoginRequest) => {
         try {

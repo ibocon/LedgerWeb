@@ -1,5 +1,5 @@
 // module
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useHistory, Link } from 'react-router-dom';
 import { unwrapResult } from '@reduxjs/toolkit';
@@ -7,14 +7,20 @@ import { Button, Form, Input, Alert, Result } from 'antd';
 import { UserOutlined, LockOutlined, LoadingOutlined } from '@ant-design/icons';
 // source
 import { Container, Logo, Header, Navigator, Label } from './component';
-import { useAppDispatch, signup, notify, selectNotification } from 'src/app/feature';
+import { useAppDispatch, signup, notify, selectNotification, selectUserId } from 'src/app/feature';
 import { isUserModel, isFail } from 'src/app/component';
 // component
 export function Signup() {
-    const dispatch = useAppDispatch();
     const history = useHistory();
+    const dispatch = useAppDispatch();
     const [status, setStatus] = useState<AsyncStatus>('idle');
+    const userId = useSelector(selectUserId);
     const notification = useSelector(selectNotification);
+
+    useEffect(() => {
+        if(userId)
+            history.push('/board');
+    },[history, userId]);
 
     const onFinish = async ({email, password} : {email: string, password: string, confirmPassword: string}) => {
         try {

@@ -13,30 +13,30 @@ const StyledHeader = styled(Layout.Header)`
     opacity: 90%;
 `;
 const StyledLogoutButton = styled(Button)`
-  float: right;
-  font-size: 12px;
-  height: 44px;
-  margin: 10px 12px;
+    float: right;
+    font-size: 12px;
+    height: 44px;
+    margin: 10px 12px;
 `;
 // component
 export function Header() {
-  const history = useHistory();
-  const dispatch = useAppDispatch();
-  const OnLogoutButtonClicked = () => {
-    dispatch(logout());
-    history.push('/user/login');
-  };
+    const history = useHistory();
+    const dispatch = useAppDispatch();
+    const OnLogoutButtonClicked = async () => {
+        await dispatch(logout());
+        history.push('/user/login');
+};
 
   return (
-    <StyledHeader>
-      <SiderCollapseButton />
-      <StyledLogoutButton 
-        type="text" 
-        danger
-        onClick={OnLogoutButtonClicked}>
-        Logout
-      </StyledLogoutButton>
-    </StyledHeader>
+      <StyledHeader>
+          <SiderCollapseButton />
+          <StyledLogoutButton 
+              type="text" 
+              danger
+              onClick={OnLogoutButtonClicked}>
+              Logout
+          </StyledLogoutButton>
+      </StyledHeader>
   );
 };
 export default Header;
