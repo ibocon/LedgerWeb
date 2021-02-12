@@ -3,6 +3,7 @@ import React from 'react';
 import styled from 'styled-components';
 // file
 import logo from 'src/res/logo.svg';
+import { useHistory } from 'react-router-dom';
 // style
 const StyledLogo = styled.img`
     width: 128px;
@@ -11,13 +12,19 @@ const StyledLogo = styled.img`
 `;
 // component
 export const Logo = (props : { width?: number | string,  height?: number | string}) => {
-  return (
-    <StyledLogo 
-      src={logo} 
-      style={{ 
-        width: props.width,
-        height: props.height
-      }} />
-  );
+    const history = useHistory();
+    const onLogoClicked = () => {
+        history.push('/');
+    };
+
+    return (
+        <StyledLogo 
+            src={logo} 
+            style={{ 
+                width: props.width,
+                height: props.height
+            }}
+            onClick={onLogoClicked} />
+    );
 };
 export default Logo;

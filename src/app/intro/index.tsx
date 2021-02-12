@@ -13,6 +13,8 @@ import {
     Container, 
     DecideBreakPoint, 
     IsSmallBreakPoint } from 'src/app/component';
+import { useSelector } from 'react-redux';
+import { selectUserId } from '../feature';
 // type
 enum MenuKey {
     ledger = 'ledger',
@@ -37,6 +39,7 @@ const StyledContent = styled(Layout.Content)`
 `;
 // component
 export function IntroPage() {
+    const userId = useSelector(selectUserId);
     const [menuKey, setMenuKey] = useState<MenuKey>(MenuKey.ledger);
     const [breakWidth, setBreakWidth] = useState<BreakPointType>(BreakPointType.Large);
 
@@ -104,8 +107,14 @@ export function IntroPage() {
                         {BreakPointType.Medium <= breakWidth &&
                             Menus
                         }
-                        <Menu.Item style={{ float: 'right' }}><Link to="/user/login">Login</Link></Menu.Item>
-                        <Menu.Item style={{ float: 'right' }}><Link to="/user/signup">Signup</Link></Menu.Item>
+                        {userId == null ? (
+                            <React.Fragment>
+                                <Menu.Item style={{ float: 'right' }}><Link to="/user/login">Login</Link></Menu.Item>
+                                <Menu.Item style={{ float: 'right' }}><Link to="/user/signup">Signup</Link></Menu.Item>
+                            </React.Fragment>
+                        ) : (
+                            <Menu.Item style={{ float: 'right' }}><Link to="/board">Board</Link></Menu.Item>
+                        )}
                     </Menu>
                 </Container>
             </StyledHeader>
