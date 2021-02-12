@@ -1,22 +1,21 @@
 // module
 import React, { useState } from 'react';
+import { useSelector } from 'react-redux';
 import { useHistory, Link } from 'react-router-dom';
 import { unwrapResult } from '@reduxjs/toolkit';
 import { Button, Form, Input, Checkbox, Alert } from 'antd';
 import { UserOutlined, LockOutlined, LoadingOutlined } from '@ant-design/icons';
 // source
-import { Container, Logo, Header, Navigator, Label } from './component';
-import { login } from 'src/app/feature';
-import { useAppDispatch } from 'src/app/store';
+import { useAppDispatch, login, selectNotification, notify } from 'src/app/feature';
 import { isFail, isUserModel } from 'src/app/component';
+import { Container, Logo, Header, Navigator, Label } from './component';
 // type
 // component
 export function Login() {
-    const [status, setStatus] = useState<AsyncStatus>('idle');
-    const [error, setError] = useState<AntdAlertOptions>({ type: 'success', message: ''});
-
-    const dispatch = useAppDispatch();
     const history = useHistory();
+    const dispatch = useAppDispatch();    
+    const [status, setStatus] = useState<AsyncStatus>('idle');
+    const notification = useSelector(selectNotification);
 
     const onFinish = async ({email, password, isStaySignedIn } : LoginRequest) => {
         try {
@@ -26,14 +25,14 @@ export function Login() {
                 history.push('/board');
                 setStatus('fulfilled');
             } else if (isFail(result)) {
-                setError({ type: 'warning', message: `${result.error.message}` });
+                dispatch(notify({ level: 'warning', message: `${result.error.message}`}));
                 setStatus('rejected');
             }
             else {
                 throw Error('Something went wrong...');
             }
         } catch (error) {
-            setError({ type: 'error', message: 'Error occured. please contact administrator.' });
+            dispatch(notify({ level: 'error', message: 'Error occured. please contact administrator.'}));
             setStatus('rejected');
         }
     };
@@ -72,7 +71,14 @@ export function Login() {
                         placeholder="Enter password"
                         tabIndex={2} />
                 </Form.Item>
-                {status === 'rejected' && <Alert style={{ marginBottom: '10px' }} type={error.type} message={error.message} showIcon closable />}
+                {notification.level !== undefined && 
+                    <Alert 
+                        style={{ marginBottom: '10px' }} 
+                        type={notification.level} 
+                        message={notification.message} 
+                        showIcon 
+                        closable />
+                }
                 <Form.Item 
                     name="isStaySignedIn"
                     valuePropName="checked">

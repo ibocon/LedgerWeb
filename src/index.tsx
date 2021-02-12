@@ -4,10 +4,10 @@ import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { HashRouter } from 'react-router-dom';
 // source
-import { reportWebVitals } from './reportWebVitals';
-import App from './app/App';
-import { store } from './app/store';
-import { mockServer } from './server';
+import { reportWebVitals } from 'src/reportWebVitals';
+import App from 'src/app/App';
+import { store } from 'src/app/feature';
+import { mockServer } from 'src/server.js';
 // style
 import 'src/normalize.css';
 import 'src/index.sass';

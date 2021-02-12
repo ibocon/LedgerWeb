@@ -69,9 +69,13 @@ export const mockServer = ({ environment = 'test' }) => {
                 if(responseUser === null)
                     return new Response(401, {}, { error: { message: `Unauthorized.` }});
 
+                // 토큰을 만료시켜 다시 로그인하도록 하는 코드
+                // if(Math.floor(Math.random() * 10) >= 8)
+                //     responseUser.update({ token: generateToken()});
+
                 const requestAuthToken = request.requestHeaders.Authorization.replace('Bearer ','');
                 if(requestAuthToken !== responseUser.token)
-                    return new Response(401, {}, { error: { message: `Unauthorized.` }});
+                    return new Response(401, {}, { error: { message: `Previous login is expired. Should login again.` }});
                 
                 return new Response(201, {}, { id: responseUser.id, email: responseUser.email });
             });

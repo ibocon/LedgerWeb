@@ -6,7 +6,7 @@ import { Layout, Menu } from 'antd';
 import { UserOutlined, VideoCameraOutlined, UploadOutlined } from '@ant-design/icons';
 // source
 import { Logo } from 'src/app/component';
-import { selectSidebarCollapsed } from 'src/app/feature/interface';
+import { selectSidebarCollapsed } from 'src/app/feature/interfaceFeature';
 // style
 const StyledMenu = styled(Menu.Item)`
   font-size: 16px;

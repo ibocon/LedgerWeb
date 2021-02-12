@@ -2,7 +2,7 @@
 import { createSlice, createAsyncThunk, SliceCaseReducers } from '@reduxjs/toolkit';
 import { UserService } from 'src/api/user';
 // source
-import { RootState } from 'src/app/store';
+import { RootState } from 'src/app/feature';
 import { isUserModel } from 'src/app/component';
 // type
 const name : string = "user";

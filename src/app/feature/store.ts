@@ -4,8 +4,8 @@ import { combineReducers } from 'redux';
 import { configureStore, getDefaultMiddleware } from '@reduxjs/toolkit';
 import { logger } from 'redux-logger';
 // source
-import { interfaceReducer } from 'src/app/feature/interface';
-import { userReducer } from 'src/app/feature/user';
+import { interfaceReducer } from 'src/app/feature/interfaceFeature';
+import { userReducer } from 'src/app/feature/userFeature';
 // root reducer
 const rootReducer = combineReducers({
     interface: interfaceReducer,
