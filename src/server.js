@@ -66,9 +66,6 @@ export const mockServer = ({ environment = 'test' }) => {
                 const requestUserId = request.params.id;
                 const responseUser = schema.users.find(requestUserId);
 
-                if(responseUser === null)
-                    return new Response(401, {}, { error: { message: `Unauthorized.` }});
-
                 // 토큰을 만료시켜 다시 로그인하도록 하는 코드
                 // if(Math.floor(Math.random() * 10) >= 8)
                 //     responseUser.update({ token: generateToken()});
@@ -76,8 +73,23 @@ export const mockServer = ({ environment = 'test' }) => {
                 const requestAuthToken = request.requestHeaders.Authorization.replace('Bearer ','');
                 if(requestAuthToken !== responseUser.token)
                     return new Response(401, {}, { error: { message: `Previous login is expired. Should login again.` }});
-                
+
+                if(responseUser === null)
+                    return new Response(401, {}, { error: { message: `Unauthorized.` }});
+
                 return new Response(201, {}, { id: responseUser.id, email: responseUser.email });
+            });
+
+            this.get('/user/logout', (schema, request) => {
+                const requestAuthToken = request.requestHeaders.Authorization.replace('Bearer ','');
+                const responseUser = schema.users.findBy({ token: requestAuthToken });
+
+                if(responseUser) {
+                    responseUser.update({ token: null });
+                    return new Response(200, {}, { id: responseUser.id, email: responseUser.email });
+                }
+                else
+                    return new Response(404, {}, { error: { message: `Unabled to find user.` }});
             });
         },
     });

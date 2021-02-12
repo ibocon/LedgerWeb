@@ -1,7 +1,7 @@
 // module
 import { createSlice, PayloadAction, SliceCaseReducers } from '@reduxjs/toolkit';
 // source
-import { RootState } from 'src/app/feature';
+import { RootState } from './rootFeature';
 // type
 const name : string = "interface";
 type InterfaceState = {

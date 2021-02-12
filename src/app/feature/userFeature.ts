@@ -2,8 +2,8 @@
 import { createSlice, createAsyncThunk, SliceCaseReducers } from '@reduxjs/toolkit';
 import { UserService } from 'src/api/user';
 // source
-import { RootState } from 'src/app/feature';
 import { isUserModel } from 'src/app/component';
+import { RootState } from './rootFeature';
 // type
 const name : string = "user";
 interface UserState extends UserModel { }
@@ -44,6 +44,12 @@ export const signup = createAsyncThunk<UserState | Fail, SignupRequest>(
         });
         return response;
     });
+export const logout = createAsyncThunk<UserState | Fail, void>(
+    `${name}/logout`,
+    async () : Promise<UserState | Fail> => {
+        UserService.logout();
+        return { id: null, email: null };
+    });
 // selector
 export const selectUserId = (state : RootState) : number | null => state.user.id;
 export const selectUserEmail = (state : RootState) : string | null => state.user.email;
@@ -55,12 +61,15 @@ export const userSlice = createSlice<UserState, SliceCaseReducers<UserState>>({
         email: null,
     },
     reducers:{
-        logout: (state) => {
-            state.email = '';
-        },
+
     },
     extraReducers: builder => {
         builder.addCase(login.fulfilled, (state : UserState, { payload } : { payload : UserState | Fail}) => {
+            if(isUserState(payload)) {
+                state.id = payload.id;
+                state.email = payload.email;
+            }
+        }).addCase(logout.fulfilled, (state : UserState, { payload } : { payload : UserState | Fail}) => {
             if(isUserState(payload)) {
                 state.id = payload.id;
                 state.email = payload.email;
@@ -69,6 +78,6 @@ export const userSlice = createSlice<UserState, SliceCaseReducers<UserState>>({
     }
 });
 // action
-export const { logout } = userSlice.actions;
+// export const { } = userSlice.actions;
 export const userReducer = userSlice.reducer;
 export default userReducer;

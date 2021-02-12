@@ -30,12 +30,10 @@ export const UserService = {
                 headers: { Authorization: `Bearer ${token.get()}` }
             });
     
-            if(isUserResponse(response)) { 
+            if(isUserResponse(response))
                 return { id: parseInt(response.data.id), email: response.data.email };
-            }
-            if(isFailResponse(response)) {
+            if(isFailResponse(response))
                 return response.data;
-            }
     
             return { error: { message: 'server response is not correctly formatted.' } };
         } catch(error) {
@@ -46,6 +44,20 @@ export const UserService = {
         }
     },
     login: login,
+    logout: async () : Promise<void | Fail> => {
+        try{
+            client.get<UserResponse | FailResponse>(`/api/user/logout`, {
+                headers: { Authorization: `Bearer ${token.get()}` }
+            });
+            token.clear();
+            return;
+        } catch(error) {
+            if(axios.isAxiosError(error))
+            if(isFailResponse(error.response))
+                return error.response.data;
+            throw error;
+        }
+    },
     signup: signup,
 };
 export default UserService;
