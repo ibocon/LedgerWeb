@@ -7,6 +7,10 @@ import { RootState } from './rootFeature';
 // type
 const name : string = "user";
 interface UserState extends UserModel { }
+const intialState = {
+    id: null,
+    email: null,
+};
 function isUserState(state : any): state is UserState {
     if(isUserModel(state)) {
         return true;
@@ -44,11 +48,11 @@ export const signup = createAsyncThunk<UserState | Fail, SignupRequest>(
         });
         return response;
     });
-export const logout = createAsyncThunk<UserState | Fail, void>(
+export const logout = createAsyncThunk<void, void>(
     `${name}/logout`,
-    async () : Promise<UserState | Fail> => {
+    async () : Promise<void> => {
         UserService.logout();
-        return { id: null, email: null };
+        return;
     });
 // selector
 export const selectUserId = (state : RootState) : number | null => state.user.id;
@@ -56,10 +60,7 @@ export const selectUserEmail = (state : RootState) : string | null => state.user
 // slice
 export const userSlice = createSlice<UserState, SliceCaseReducers<UserState>>({
     name: name,
-    initialState: {
-        id: null,
-        email: null,
-    },
+    initialState: intialState,
     reducers:{
 
     },
@@ -69,11 +70,8 @@ export const userSlice = createSlice<UserState, SliceCaseReducers<UserState>>({
                 state.id = payload.id;
                 state.email = payload.email;
             }
-        }).addCase(logout.fulfilled, (state : UserState, { payload } : { payload : UserState | Fail}) => {
-            if(isUserState(payload)) {
-                state.id = payload.id;
-                state.email = payload.email;
-            }
+        }).addCase(logout.fulfilled, (state : UserState) => {
+            state = intialState;
         });
     }
 });

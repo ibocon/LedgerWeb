@@ -2,12 +2,20 @@
 import { createSlice, PayloadAction, SliceCaseReducers } from '@reduxjs/toolkit';
 // source
 import { RootState } from './rootFeature';
+import { logout } from './userFeature';
 // type
 const name : string = "interface";
 type InterfaceState = {
     sidebarCollapsed : boolean;
     notification : Notification;
 };
+const intialState : InterfaceState = {
+    sidebarCollapsed: false,
+    notification : {
+        level: undefined,
+        message: ''
+    }
+}
 type Notification = {
     level: 'success' | 'info' | 'warning' | 'error' | undefined;
     message: string;
@@ -18,13 +26,7 @@ export const selectNotification = (state : RootState) => state.interface.notific
 // slice
 export const interfaceSlice = createSlice<InterfaceState, SliceCaseReducers<InterfaceState>>({
     name: name,
-    initialState: {
-        sidebarCollapsed: false,
-        notification : {
-            level: undefined,
-            message: ''
-        }
-    },
+    initialState: intialState,
     reducers: {
         switchSidebarCollapsed: (state, action : PayloadAction<boolean>) => {
             state.sidebarCollapsed = action.payload;
@@ -32,6 +34,11 @@ export const interfaceSlice = createSlice<InterfaceState, SliceCaseReducers<Inte
         notify: (state, action: PayloadAction<Notification>) => {
             state.notification = action.payload;
         },
+    },
+    extraReducers: builder => {
+        builder.addCase(logout.fulfilled, (state: InterfaceState) => {
+            state = intialState;
+        });
     }
 });
 // action
