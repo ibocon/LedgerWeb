@@ -6,6 +6,7 @@ import styled from 'styled-components';
 import { BreakPointType } from 'src/app/component';
 import { Header } from './Header';
 import { Sider } from './Sider';
+import { AddRecordMenu } from './AddRecordMenu';
 // style
 const StyledContent = styled(Layout.Content)`
     background-color: rgb(255,255,255);
@@ -24,6 +25,9 @@ export function BoardPage() {
                     
                 </StyledContent>
             </Layout>
+            <div style={{ position: 'fixed', bottom: 15, right: 15 }}>
+                <AddRecordMenu />
+            </div>
         </Layout>
     );
 }
