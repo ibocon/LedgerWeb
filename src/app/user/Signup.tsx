@@ -17,10 +17,11 @@ export function Signup() {
     const userId = useSelector(selectUserId);
     const notification = useSelector(selectNotification);
 
+    // 이미 로그인했는지 확인
     useEffect(() => {
-        if(userId)
+        if(userId && status === 'idle')
             history.push('/board');
-    },[history, userId]);
+    },[history, userId, status]);
 
     const onFinish = async ({email, password} : {email: string, password: string, confirmPassword: string}) => {
         try {

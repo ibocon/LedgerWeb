@@ -5,7 +5,6 @@ import { Layout, Button } from 'antd';
 // source
 import { SiderCollapseButton } from './SiderCollapseButton';
 import { logout, useAppDispatch } from 'src/app/feature';
-import { useHistory } from 'react-router-dom';
 // style
 const StyledHeader = styled(Layout.Header)`
     padding: 0;
@@ -20,14 +19,12 @@ const StyledLogoutButton = styled(Button)`
 `;
 // component
 export function Header() {
-    const history = useHistory();
     const dispatch = useAppDispatch();
     const OnLogoutButtonClicked = async () => {
         await dispatch(logout());
-        history.push('/user/login');
-};
+    };
 
-  return (
+    return (
       <StyledHeader>
           <SiderCollapseButton />
           <StyledLogoutButton 
@@ -37,6 +34,6 @@ export function Header() {
               Logout
           </StyledLogoutButton>
       </StyledHeader>
-  );
+    );
 };
 export default Header;
