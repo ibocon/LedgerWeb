@@ -9,6 +9,7 @@ import { BoardPage } from './board';
 import { UserPage } from './user';
 // style
 import 'antd/dist/antd.css';
+import 'src/style';
 // component
 export function App() {
   return(

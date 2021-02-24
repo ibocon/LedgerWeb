@@ -1,0 +1,9 @@
+@use "../style/theme/index" as theme;
+
+$btn-prefix-cls: #{theme.$gun-prefix}-btn;
+
+.#{$btn-prefix-cls} {
+    background-color: rgb(128, 128, 128);
+    border-radius: 100%;
+}
+
