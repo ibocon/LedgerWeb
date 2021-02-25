@@ -1,9 +1,9 @@
-@use "../style/theme/index" as theme;
+@use "../style/theme" as theme;
+@use "../style/mixin" as mixin;
 
-$btn-prefix-cls: #{theme.$gun-prefix}-btn;
+$btn-prefix-cls: #{theme.$root-prefix}-btn;
 
 .#{$btn-prefix-cls} {
-    background-color: rgb(128, 128, 128);
-    border-radius: 100%;
+    @include mixin.button;
 }
 

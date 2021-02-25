@@ -44,7 +44,7 @@ module.exports = {
       },
       // Style
       {
-        test: /\.(sa|c)ss$/i,
+        test: /\.s?[ac]ss$/i,
         use: ["style-loader", "css-loader", "sass-loader"],
       },
       // Image

@@ -1,4 +1,5 @@
 import './index.sass';
-import * as style from 'src/style/index';
+import * as globalStyle from 'src/style';
 
-export const buttnPrefix = `${style.theme.rootPrefix}-btn`;
+export * as globalStyle from 'src/style';
+export const buttnPrefix = `${globalStyle.theme.rootPrefix}-btn`;

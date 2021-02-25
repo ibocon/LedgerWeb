@@ -8,13 +8,21 @@ type ButtonShape = 'circle' | 'round';
 interface ButtonProps {
     shape?: ButtonShape;
     icon?: React.ReactNode;
+    size?: style.globalStyle.SizeType;
 };
 // component
 const Button : React.FunctionComponent<ButtonProps> = (props : ButtonProps) => {
-    const { shape, icon } = props;
+    const { 
+        shape, 
+        icon, 
+        size,
+    } = props;
 
     const className = classNames(
         style.buttnPrefix,
+        {
+            [`${style.buttnPrefix}-${shape}`]: shape,
+        }
     );
 
     return(
