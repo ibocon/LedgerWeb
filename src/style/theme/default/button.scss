@@ -1,9 +1,10 @@
-@use './index';
+@use './base' as base;
+
 // -------- Button 버튼 -----------
 
 $btn-font-weight: 400;
 $btn-shadow: 0 2px 0 rgba(0, 0, 0, 0.015);
 
-$btn-height-base: $height-base;
-$btn-height-lg: $height-lg;
-$btn-height-sm: $height-sm;
+$btn-height-base: base.$height-base;
+$btn-height-lg: base.$height-lg;
+$btn-height-sm: base.$height-sm;

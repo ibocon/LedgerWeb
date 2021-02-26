@@ -1,4 +1,5 @@
 @use "sass:math" as math;
+@use "../theme/default/base";
 
 // button
 @mixin button-size($height, $padding-horizontal, $font-size, $border-radius) {

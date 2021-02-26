@@ -11,7 +11,7 @@ interface ButtonProps {
     size?: style.globalStyle.SizeType;
 };
 // component
-const Button : React.FunctionComponent<ButtonProps> = (props : ButtonProps) => {
+export const Button : React.FunctionComponent<ButtonProps> = (props : ButtonProps) => {
     const { 
         shape, 
         icon, 

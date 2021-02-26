@@ -15,6 +15,7 @@ import {
     IsSmallBreakPoint } from 'src/app/component';
 import { useSelector } from 'react-redux';
 import { selectUserId } from '../feature';
+import * as ledger from 'src/component';
 // type
 enum MenuKey {
     ledger = 'ledger',
@@ -138,6 +139,7 @@ export function IntroPage() {
                             <p>Ledger update 에 대한 소개</p>
                         </div>
                     )}
+                    <ledger.Button />
                 </Container>
             </StyledContent>
         </Layout>
