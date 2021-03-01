@@ -1,0 +1,93 @@
+/**
+ * All Rights Reserved
+ * Copyright (c) 2021 Yegun Kim
+ * Created by Yegun Kim (https://ibocon.tistory.com)
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+ * THE SOFTWARE.
+ */
+
+////
+/// `border-radius` 스타일 속성을 위한 mixin module 입니다.
+/// @author Yegun Kim
+////
+
+@use '../variable' as variable;
+
+@function valid-radius($radius) {
+    $return: ();
+    @each $value in $radius {
+      @if type-of($value) == number {
+        $return: append($return, max($value, 0));
+      } @else {
+        $return: append($return, $value);
+      }
+    }
+    @return $return;
+}
+
+@mixin border-radius($radius: $border-radius, $fallback-border-radius: false) {
+    @if variable.$enable-rounded {
+        border-radius: valid-radius($radius);
+    }
+    @else if $fallback-border-radius != false {
+        border-radius: $fallback-border-radius;
+    }
+}
+  
+@mixin border-top-radius($radius: $border-radius) {
+    @if variable.$enable-rounded {
+        border-top-left-radius: valid-radius($radius);
+        border-top-right-radius: valid-radius($radius);
+    }
+}
+  
+@mixin border-end-radius($radius: $border-radius) {
+    @if variable.$enable-rounded {
+        border-top-right-radius: valid-radius($radius);
+        border-bottom-right-radius: valid-radius($radius);
+    }
+}
+  
+@mixin border-bottom-radius($radius: $border-radius) {
+    @if variable.$enable-rounded {
+        border-bottom-right-radius: valid-radius($radius);
+        border-bottom-left-radius: valid-radius($radius);
+    }
+}
+  
+@mixin border-start-radius($radius: $border-radius) {
+    @if variable.$enable-rounded {
+        border-top-left-radius: valid-radius($radius);
+        border-bottom-left-radius: valid-radius($radius);
+    }
+}
+  
+@mixin border-top-left-radius($radius: $border-radius) {
+    @if variable.$enable-rounded {
+        border-top-left-radius: valid-radius($radius);
+    }
+}
+  
+@mixin border-top-right-radius($radius: $border-radius) {
+    @if variable.$enable-rounded {
+        border-top-right-radius: valid-radius($radius);
+    }
+}
+  
+@mixin border-bottom-right-radius($radius: $border-radius) {
+    @if variable.$enable-rounded {
+        border-bottom-right-radius: valid-radius($radius);
+    }
+}
+  
+@mixin border-bottom-left-radius($radius: $border-radius) {
+    @if variable.$enable-rounded {
+        border-bottom-left-radius: valid-radius($radius);
+    }
+}

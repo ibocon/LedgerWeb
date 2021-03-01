@@ -13,16 +13,10 @@
  */
 
 ////
-/// 외부 라이브러리입니다.
+/// `class` 이름 또는 `variable` 이름 앞에 사용되는 prefix 변수 모음입니다.
+/// @group Variable
 /// @author Yegun Kim
 ////
 
-/// 브라우저 별로 차이가 나는 element rendering 스타일을 통일하는 라이브러리입니다.
-/// @link https://github.com/necolas/normalize.css
-@forward "normalize";
-/// viewport 크기에 따라 폰트 크기를 resposive 하게 계산해주는 라이브러리입니다. 
-/// @link https://github.com/twbs/rfs
-@forward "rfs";
-/// Ant Design UI Framework 를 활용하기 위해 사용하는 라이브러리입니다.
-/// @link https://github.com/ant-design/ant-design
-@forward "antd";
+$root-prefix:           'ledger';
+$variable-prefix:       'bs-' !default;
