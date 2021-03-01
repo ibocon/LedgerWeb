@@ -1,9 +1,0 @@
-@use "../../../style/theme" as theme;
-@use "../../../style/mixin/button" as button;
-
-$btn-prefix-cls: #{theme.$root-prefix}-btn;
-
-.#{$btn-prefix-cls} {
-    @include button.button;
-}
-

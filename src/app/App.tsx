@@ -8,8 +8,7 @@ import { IntroPage } from './intro';
 import { BoardPage } from './board';
 import { UserPage } from './user';
 // style
-import 'antd/dist/antd.css';
-import 'src/style';
+import 'src/style/index.scss';
 // component
 export function App() {
   return(

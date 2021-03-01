@@ -139,7 +139,7 @@ export function IntroPage() {
                             <p>Ledger update 에 대한 소개</p>
                         </div>
                     )}
-                    <ledger.Button />
+                    <ledger.Button theme='white' />
                 </Container>
             </StyledContent>
         </Layout>

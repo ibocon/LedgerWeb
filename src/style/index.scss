@@ -1,2 +1,28 @@
-@use "./theme";
-@use "./mixin";
+/*!
+ * All Rights Reserved
+ * Copyright (c) 2021 Yegun Kim
+ * Created by Yegun Kim (https://ibocon.tistory.com)
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+ * THE SOFTWARE.
+ */
+
+////
+/// Ledger 프로젝트의 스타일은 SCSS로 작성되었으며, 코딩 규칙은 'Sass Guideline' 을 따릅니다.
+/// Architecture 은 '7-1 Pattern' 을 참고하여 구성했습니다.
+/// Methodology 는 'BEM', 'OOCSS' 등 여러 methodology 섞어 사용합니다.
+/// @author Yegun Kim
+/// @link https://sass-guidelin.es/
+////
+@charset 'utf-8';
+
+@forward "vendor" as vender-*;
+@forward "variable" as variable-*;
+@forward "function" as function-*;
+@forward "mixin" as mixin-*;
+@forward "theme" as theme-*;

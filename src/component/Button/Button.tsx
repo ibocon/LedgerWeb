@@ -2,26 +2,23 @@
 import React from 'react';
 import classNames from 'classnames';
 // style
-import * as style from './style';
+import style from './Button.scss';
 // type
-type ButtonShape = 'circle' | 'round';
+type ButtonTheme = 'white' | 'dark';
 interface ButtonProps {
-    shape?: ButtonShape;
-    icon?: React.ReactNode;
-    size?: style.globalStyle.SizeType;
+    theme?: ButtonTheme;
 };
 // component
 export const Button : React.FunctionComponent<ButtonProps> = (props : ButtonProps) => {
     const { 
-        shape, 
-        icon, 
-        size,
+        theme,
     } = props;
 
     const className = classNames(
-        style.buttnPrefix,
+        style.classPrefix,
         {
-            [`${style.buttnPrefix}-${shape}`]: shape,
+            [`${style.whiteTheme}`]: theme === 'white',
+            [`${style.darkTheme}`]: theme === 'dark',
         }
     );
 

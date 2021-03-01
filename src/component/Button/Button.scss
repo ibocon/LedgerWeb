@@ -1,0 +1,23 @@
+@use "sass:string" as string;
+@use "~/src/style" as style;
+
+$class-prefix: "#{style.$variable-root-prefix}-button";
+
+.#{$class-prefix} {
+    width: 100px;
+    height: 100px;
+}
+
+.#{$class-prefix}__white-theme {
+    background-color: #{style.$theme-white-button-background-color};
+}
+
+.#{$class-prefix}__dark-theme {
+    background-color: #{style.$theme-dark-button-background-color};
+}
+
+:export {
+    classPrefix: string.unquote($class-prefix);
+    whiteTheme: string.unquote("#{$class-prefix}__white-theme");
+    darkTheme: string.unquote("#{$class-prefix}__dark-theme");
+}

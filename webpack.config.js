@@ -4,7 +4,6 @@ const path = require("path");
 const srcPath = path.join(__dirname, "src");
 const distPath = path.join(__dirname, "dist");
 const publicPath = path.join(__dirname, "public");
-
 // Plugins
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
@@ -13,7 +12,6 @@ const CopyPlugin = require("copy-webpack-plugin");
 const ForkTsCheckerWebpackPlugin = require("fork-ts-checker-webpack-plugin");
 const { TsconfigPathsPlugin } = require("tsconfig-paths-webpack-plugin");
 const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin');
-
 // Modules
 const isDevelopment = process.env.NODE_ENV !== 'production';
 module.exports = {
@@ -44,8 +42,15 @@ module.exports = {
       },
       // Style
       {
-        test: /\.s?[ac]ss$/i,
-        use: ["style-loader", "css-loader", "sass-loader"],
+        test: /\.scss$/i,
+        use: [ 
+          "style-loader", 
+          {
+            loader: "css-loader", 
+            options: { modules: { compileType: "icss" }}
+          }, 
+          "sass-loader"
+        ],
       },
       // Image
       {

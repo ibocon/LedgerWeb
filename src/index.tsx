@@ -8,9 +8,6 @@ import { reportWebVitals } from 'src/reportWebVitals';
 import App from 'src/app/App';
 import { store } from 'src/app/feature';
 import { mockServer } from 'src/server.js';
-// style
-import 'src/normalize.css';
-import 'src/index.scss';
 // main
 if (process.env.NODE_ENV === "development") {
     mockServer({ environment: "development" });
