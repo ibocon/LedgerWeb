@@ -4,27 +4,29 @@ import classNames from 'classnames';
 // style
 import style from './Button.scss';
 // type
-type ButtonTheme = 'white' | 'dark';
+type ButtonSizeType = 'small' | 'middle' | 'large' | undefined;
 interface ButtonProps {
-    theme?: ButtonTheme;
+    children?: React.ReactNode;
+    size?: ButtonSizeType;
 };
 // component
 export const Button : React.FunctionComponent<ButtonProps> = (props : ButtonProps) => {
     const { 
-        theme,
+        children,
+        size,
     } = props;
 
     const className = classNames(
-        style.classPrefix,
+        style.base,
         {
-            [`${style.whiteTheme}`]: theme === 'white',
-            [`${style.darkTheme}`]: theme === 'dark',
-        }
+            [`${style.small}`]: size === 'small',
+            [`${style.large}`]: size === 'large',
+        },
     );
 
     return(
         <button className={ className } >
-
+            { children }
         </button>
     );
 };

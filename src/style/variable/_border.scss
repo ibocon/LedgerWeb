@@ -13,10 +13,33 @@
  */
 
 ////
-/// `class` 이름 또는 `variable` 이름 앞에 사용되는 prefix 변수 모음입니다.
+/// border 변수 모음입니다.
 /// @group Variable
 /// @author Yegun Kim
 ////
 
-$prefix-root:           'ledger';
-$prefix-variable:       'bs-' !default;
+@use "color" as color;
+
+/* 1. border-radius */
+$border-radius-base:          0.25rem !default;
+$border-radius-small:         0.2rem !default;
+$border-radius-large:         0.3rem !default;
+$border-radius-pill:          50rem !default;
+
+/* 2. border-width */
+$border-width-base:           1px !default;
+$border-widths: (
+  0: 0,
+  1: 1px,
+  2: 2px,
+  3: 3px,
+  4: 4px,
+  5: 5px
+) !default;
+
+/* 3. border-style */
+$border-style-solid:          solid !default;
+$border-style-base:           $border-style-solid !default;
+
+/* other */
+$border-color-base:           color.$color-gray-300 !default;
