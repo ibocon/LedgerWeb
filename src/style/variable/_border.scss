@@ -21,9 +21,9 @@
 @use "color" as color;
 
 /* 1. border-radius */
-$border-radius-base:          0.25rem !default;
-$border-radius-small:         0.2rem !default;
-$border-radius-large:         0.3rem !default;
+$border-radius-base:          0.15rem !default;
+$border-radius-small:         0.10rem !default;
+$border-radius-large:         0.2rem !default;
 $border-radius-pill:          50rem !default;
 
 /* 2. border-width */
@@ -42,4 +42,5 @@ $border-style-solid:          solid !default;
 $border-style-base:           $border-style-solid !default;
 
 /* other */
-$border-color-base:           color.$color-gray-300 !default;
+$border-color-base:           hsl(0, 0%, 85%) !default;
+

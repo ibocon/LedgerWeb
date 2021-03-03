@@ -18,9 +18,10 @@
 /// @author Yegun Kim
 ////
 
+@use "sass:color" as sass-color;
 @use "prefix" as prefix;
 @use "spacing" as spacing;
-@use "color" as color;
+@use "color" as ledger-color;
 
 /* 1. font-family */
 $font-family-sans-serif:      system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji" !default;
@@ -48,7 +49,7 @@ $line-height-small:           1.25 !default;
 $line-height-large:           2 !default;
 
 /* 5. color */
-$text-color-base:             color.$color-gray-900;
+$text-color-base:             sass-color.adjust(ledger-color.$color-black, $alpha: -0.15); 
 
 /* others */
 // $h1-font-size:                $font-size-base * 2.5 !default;
