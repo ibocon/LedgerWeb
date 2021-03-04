@@ -1,0 +1,33 @@
+/**
+ * All Rights Reserved
+ * Copyright (c) 2021 Yegun Kim
+ * Created by Yegun Kim (https://ibocon.tistory.com)
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+ * THE SOFTWARE.
+ */
+
+////
+/// function 모음입니다.
+/// @group Variable
+/// @author Yegun Kim
+////
+
+@use "./variable/animation" as variable-animation;
+
+/// easing 함수로 만들어진 timing-function 을 반환합니다.
+/// @param {String} $function-name - easeing 함수 이름
+@function get-timing-function($function-name) {
+    @if map-has-key(variable-animation.$easeing-functions, $function-name) {
+        $function-value: map-get(variable-animation.$easeing-functions, $function-name);
+        @return cubic-bezier($function-value);
+    }
+
+    @warn "get-timing-function 함수로 요청한 '#{$function-name}' 은 아직 존재하지 않는 timing-function 입니다.";
+    @return ease;
+}

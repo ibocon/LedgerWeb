@@ -94,31 +94,47 @@ $line-height:                   style.$variable-line-height-base !default;
 }
 
 /* 3. selector */
-$prefix-base: "#{style.$variable-prefix-root}-button";
-:export { base: string.unquote($prefix-base); }
+$prefix-base: #{style.$variable-prefix-root}-button;
 .#{$prefix-base} {
     
     position: initial;
     display: inline-block;
+    vertical-align: middle;
+
+    outline: 0rem;
 
     text-align: center;
     font-family: $font-family;
     font-weight: $font-weight;
     line-height: $line-height;
+    white-space: nowrap;
+    text-decoration: none;
+    
+    transition: all 0.3s style.function-get-timing-function(ease-in-out);
+
+    user-select: none;
 
     @include size($padding-x-base, $padding-y-base, $font-size-base, $border-radius-base);
     @include border($border-width-base, $border-style-base, $border-color-base);
     @include color($text-color-base, $background-color-base);
+
+    &:hover {
+        @include border($border-width-base, $border-style-base, #40A9FF);
+        @include color(#40A9FF, $background-color-base);
+    }
+    /* size */
+    &__small {
+        @include size($padding-x-small, $padding-y-small, $font-size-small, $border-radius-small);
+    }
+    
+    &__large {
+        @include size($padding-x-large, $padding-y-large, $font-size-large, $border-radius-large);
+    }
+
 }
 
-$class-button-small: "#{$prefix-base}__small";
-:export { small: string.unquote($class-button-small); }
-.#{$class-button-small} {
-    @include size($padding-x-small, $padding-y-small, $font-size-small, $border-radius-small);
-}
-
-$class-button-large: "#{$prefix-base}__large";
-:export { large: string.unquote($class-button-large); }
-.#{$class-button-large} {
-    @include size($padding-x-large, $padding-y-large, $font-size-large, $border-radius-large);
+:export { 
+    base: $prefix-base;
+    small: #{$prefix-base}__small; 
+    large: #{$prefix-base}__large; 
 }
