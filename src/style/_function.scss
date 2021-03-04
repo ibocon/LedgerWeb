@@ -22,6 +22,7 @@
 
 /// easing 함수로 만들어진 timing-function 을 반환합니다.
 /// @param {String} $function-name - easeing 함수 이름
+/// @link https://css-tricks.com/snippets/sass/easing-map-get-function/ css-tricks 글을 참고해 개발했습니다.
 @function get-timing-function($function-name) {
     @if map-has-key(variable-animation.$easeing-functions, $function-name) {
         $function-value: map-get(variable-animation.$easeing-functions, $function-name);
