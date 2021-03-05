@@ -16,7 +16,6 @@ export const Button : React.FunctionComponent<ButtonProps> = (props : ButtonProp
         size,
     } = props;
 
-    console.dir(style);
     const className = classNames(
         style.base,
         {

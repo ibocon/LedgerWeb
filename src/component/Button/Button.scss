@@ -112,6 +112,7 @@ $prefix-base: #{style.$variable-prefix-root}-button;
     
     transition: all 0.3s style.function-get-timing-function(ease-in-out);
 
+    cursor: pointer;
     user-select: none;
 
     @include size($padding-x-base, $padding-y-base, $font-size-base, $border-radius-base);
