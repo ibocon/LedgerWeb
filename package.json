@@ -4,6 +4,8 @@
   "private": true,
   "dependencies": {
     "@ant-design/icons": "^4.6.2",
+    "@redux-devtools/core": "^3.9.0",
+    "@redux-devtools/instrument": "^1.11.0",
     "@reduxjs/toolkit": "^1.5.1",
     "@testing-library/jest-dom": "^5.12.0",
     "@testing-library/react": "^11.2.6",
@@ -78,7 +80,6 @@
     "miragejs": "^0.1.41",
     "raw-loader": "^4.0.2",
     "react-refresh": "^0.9.0",
-    "redux-devtools": "^3.7.0",
     "sass": "^1.32.12",
     "sass-loader": "^10.1.1",
     "style-loader": "^2.0.0",

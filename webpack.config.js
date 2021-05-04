@@ -1,3 +1,8 @@
+/**
+ * @fileoverview configs file for bundling
+ * @author Yegun Kim <wlfka102@gmail.com>
+ */
+
 // Paths
 const webpack = require('webpack');
 const path = require("path");
