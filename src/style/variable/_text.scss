@@ -10,32 +10,35 @@
 @use "color" as ledger-color;
 
 /* 1. font-family */
-$font-family-sans-serif:      system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji" !default;
-$font-family-monospace:       SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace !default;
-$font-family-base:            var(--#{prefix.$prefix-variable}font-sans-serif) !default;
-$font-family-code:            var(--#{prefix.$prefix-variable}font-monospace) !default;
+$font-family-sans-serif: system-ui, -apple-system, "Segoe UI", Roboto,
+  "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif,
+  "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji" !default;
+$font-family-monospace: SFMono-Regular, Menlo, Monaco, Consolas,
+  "Liberation Mono", "Courier New", monospace !default;
+$font-family-base: var(--#{prefix.$prefix-variable}font-sans-serif) !default;
+$font-family-code: var(--#{prefix.$prefix-variable}font-monospace) !default;
 
-/* 2. font-size */ 
+/* 2. font-size */
 /// @property {Number} $font-size-base - 기본 텍스트 크기를 결정하는 변수입니다. `1rem = 16px` 으로 가정합니다.
-$font-size-base:              1rem !default;
-$font-size-small:             $font-size-base * 0.875 !default;
-$font-size-large:             $font-size-base * 1.25 !default;
+$font-size-base: 1rem !default;
+$font-size-small: $font-size-base * 0.875 !default;
+$font-size-large: $font-size-base * 1.25 !default;
 
 /* 3. font-weight */
-$font-weight-lighter:         lighter !default;
-$font-weight-light:           300 !default;
-$font-weight-normal:          400 !default;
-$font-weight-bold:            700 !default;
-$font-weight-bolder:          bolder !default;
-$font-weight-base:            $font-weight-normal !default;
+$font-weight-lighter: lighter !default;
+$font-weight-light: 300 !default;
+$font-weight-normal: 400 !default;
+$font-weight-bold: 700 !default;
+$font-weight-bolder: bolder !default;
+$font-weight-base: $font-weight-normal !default;
 
 /* 4. line-height */
-$line-height-base:            1.5 !default;
-$line-height-small:           1.25 !default;
-$line-height-large:           2 !default;
+$line-height-base: 1.5 !default;
+$line-height-small: 1.25 !default;
+$line-height-large: 2 !default;
 
 /* 5. color */
-$text-color-base:             sass-color.adjust(ledger-color.$color-black, $alpha: -0.15); 
+$text-color-base: sass-color.adjust(ledger-color.$color-black, $alpha: -0.15);
 
 /* others */
 // $h1-font-size:                $font-size-base * 2.5 !default;

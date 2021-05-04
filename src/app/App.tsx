@@ -1,18 +1,18 @@
 // module
-import React from 'react';
-import { Redirect, Route, Switch } from 'react-router-dom';
-import { Layout } from 'antd';
+import React from "react";
+import { Redirect, Route, Switch } from "react-router-dom";
+import { Layout } from "antd";
 // source
-import { PrivateRoute } from 'src/app/component';
-import { IntroPage } from './intro';
-import { BoardPage } from './board';
-import { UserPage } from './user';
+import { PrivateRoute } from "src/app/component";
+import { IntroPage } from "./intro";
+import { BoardPage } from "./board";
+import { UserPage } from "./user";
 // style
-import 'src/style/index.scss';
+import "src/style/index.scss";
 // component
 export function App() {
-  return(
-    <Layout style={{ minHeight: '100vh' }} >
+  return (
+    <Layout style={{ minHeight: "100vh" }}>
       <Switch>
         <Route exact path="/">
           <IntroPage />
@@ -25,7 +25,7 @@ export function App() {
         </PrivateRoute>
         <Redirect to="/" />
       </Switch>
-  </Layout>
+    </Layout>
   );
 }
 export default App;

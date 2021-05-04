@@ -4,38 +4,38 @@
 ////
 @use "sass:string" as string;
 @use "~/src/style" as style;
-    
+
 /* 1. variable */
 
 /* 1.1. layout */
-$padding-x-base:                0.95rem !default;
-$padding-x-small:               0.75rem !default;
-$padding-x-large:               1.25rem !default;
+$padding-x-base: 0.95rem !default;
+$padding-x-small: 0.75rem !default;
+$padding-x-large: 1.25rem !default;
 
-$padding-y-base:                0.25rem !default;
-$padding-y-small:               0.15rem !default;
-$padding-y-large:               0.35rem !default;
+$padding-y-base: 0.25rem !default;
+$padding-y-small: 0.15rem !default;
+$padding-y-large: 0.35rem !default;
 
-$border-width-base:             style.$variable-border-width-base !default;
-$border-style-base:             style.$variable-border-style-base !default;
-$border-color-base:             style.$variable-border-color-base !default;
+$border-width-base: style.$variable-border-width-base !default;
+$border-style-base: style.$variable-border-style-base !default;
+$border-color-base: style.$variable-border-color-base !default;
 
-$border-radius-base:            style.$variable-border-radius-base !default;
-$border-radius-small:           style.$variable-border-radius-small !default;
-$border-radius-large:           style.$variable-border-radius-large !default;
+$border-radius-base: style.$variable-border-radius-base !default;
+$border-radius-small: style.$variable-border-radius-small !default;
+$border-radius-large: style.$variable-border-radius-large !default;
 
-$background-color-base:         style.$variable-color-white;
+$background-color-base: style.$variable-color-white;
 
 /* 1.2. text */
-$font-family:                   null !default;
-$text-color-base:               style.$variable-text-color-base;
+$font-family: null !default;
+$text-color-base: style.$variable-text-color-base;
 
-$font-size-base:                style.$variable-font-size-base !default;
-$font-size-small:               style.$variable-font-size-small !default;
-$font-size-large:               style.$variable-font-size-large !default;
+$font-size-base: style.$variable-font-size-base !default;
+$font-size-small: style.$variable-font-size-small !default;
+$font-size-large: style.$variable-font-size-large !default;
 
-$font-weight:                   style.$variable-font-weight-normal !default;
-$line-height:                   style.$variable-line-height-base !default;
+$font-weight: style.$variable-font-weight-normal !default;
+$line-height: style.$variable-line-height-base !default;
 
 // $white-space:                null !default; // Set to `nowrap` to prevent text wrapping
 
@@ -62,66 +62,78 @@ $line-height:                   style.$variable-line-height-base !default;
 
 /* 2. mixin */
 @mixin size($padding-x, $padding-y, $font-size, $border-radius) {
-    padding: $padding-y $padding-x;
-    @include style.vendor-font-size($font-size);
-    @include style.mixin-border-radius($border-radius, 0);
+  padding: $padding-y $padding-x;
+  @include style.vendor-font-size($font-size);
+  @include style.mixin-border-radius($border-radius, 0);
 }
 
 @mixin color($text-color, $background-color) {
-    color: $text-color;
-    background-color: $background-color;
-
+  color: $text-color;
+  background-color: $background-color;
 }
 
 @mixin border($border-width, $border-style, $border-color) {
-    border-width: $border-width;
-    border-style: $border-style;
-    border-color: $border-color;
+  border-width: $border-width;
+  border-style: $border-style;
+  border-color: $border-color;
 }
 
 /* 3. selector */
 $prefix-base: #{style.$variable-prefix-root}-button;
 .#{$prefix-base} {
-    
-    position: initial;
-    display: inline-block;
-    vertical-align: middle;
+  position: initial;
+  display: inline-block;
+  vertical-align: middle;
 
-    outline: 0rem;
+  outline: 0rem;
 
-    text-align: center;
-    font-family: $font-family;
-    font-weight: $font-weight;
-    line-height: $line-height;
-    white-space: nowrap;
-    text-decoration: none;
-    
-    transition: all 0.3s style.function-get-timing-function(ease-in-out);
+  text-align: center;
+  font-family: $font-family;
+  font-weight: $font-weight;
+  line-height: $line-height;
+  white-space: nowrap;
+  text-decoration: none;
 
-    cursor: pointer;
-    user-select: none;
+  transition: all 0.3s style.function-get-timing-function(ease-in-out);
 
-    @include size($padding-x-base, $padding-y-base, $font-size-base, $border-radius-base);
-    @include border($border-width-base, $border-style-base, $border-color-base);
-    @include color($text-color-base, $background-color-base);
+  cursor: pointer;
+  user-select: none;
 
-    &:hover {
-        @include border($border-width-base, $border-style-base, #40A9FF);
-        @include color(#40A9FF, $background-color-base);
-    }
-    /* size */
-    &__small {
-        @include size($padding-x-small, $padding-y-small, $font-size-small, $border-radius-small);
-    }
-    
-    &__large {
-        @include size($padding-x-large, $padding-y-large, $font-size-large, $border-radius-large);
-    }
+  @include size(
+    $padding-x-base,
+    $padding-y-base,
+    $font-size-base,
+    $border-radius-base
+  );
+  @include border($border-width-base, $border-style-base, $border-color-base);
+  @include color($text-color-base, $background-color-base);
 
+  &:hover {
+    @include border($border-width-base, $border-style-base, #40a9ff);
+    @include color(#40a9ff, $background-color-base);
+  }
+  /* size */
+  &__small {
+    @include size(
+      $padding-x-small,
+      $padding-y-small,
+      $font-size-small,
+      $border-radius-small
+    );
+  }
+
+  &__large {
+    @include size(
+      $padding-x-large,
+      $padding-y-large,
+      $font-size-large,
+      $border-radius-large
+    );
+  }
 }
 
-:export { 
-    base: $prefix-base;
-    small: #{$prefix-base}__small; 
-    large: #{$prefix-base}__large; 
+:export {
+  base: $prefix-base;
+  small: #{$prefix-base}__small;
+  large: #{$prefix-base}__large;
 }

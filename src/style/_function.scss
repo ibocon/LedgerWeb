@@ -10,11 +10,14 @@
 /// @param {String} $function-name - easeing 함수 이름
 /// @link https://css-tricks.com/snippets/sass/easing-map-get-function/ css-tricks 글을 참고해 개발했습니다.
 @function get-timing-function($function-name) {
-    @if map-has-key(variable-animation.$easeing-functions, $function-name) {
-        $function-value: map-get(variable-animation.$easeing-functions, $function-name);
-        @return cubic-bezier($function-value);
-    }
+  @if map-has-key(variable-animation.$easeing-functions, $function-name) {
+    $function-value: map-get(
+      variable-animation.$easeing-functions,
+      $function-name
+    );
+    @return cubic-bezier($function-value);
+  }
 
-    @warn "get-timing-function 함수로 요청한 '#{$function-name}' 은 아직 존재하지 않는 timing-function 입니다.";
-    @return ease;
+  @warn "get-timing-function 함수로 요청한 '#{$function-name}' 은 아직 존재하지 않는 timing-function 입니다.";
+  @return ease;
 }
