@@ -15,8 +15,6 @@ const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin'
 // Modules
 const isDevelopment = process.env.NODE_ENV !== 'production';
 module.exports = {
-  // https://github.com/webpack/webpack-dev-server/issues/2758
-  target: "web",
   mode: isDevelopment ? "development" : "production",
   entry: [path.join(srcPath, "index.tsx")],
   output: {
