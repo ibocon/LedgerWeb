@@ -4,10 +4,10 @@ import ReactDOM from "react-dom";
 import { Provider } from "react-redux";
 import { HashRouter } from "react-router-dom";
 // source
-import { reportWebVitals } from "./reportWebVitals";
 import App from "@ledger-app/App";
 import { store } from "@ledger-app/feature";
-import { mockServer } from "./server.js";
+import { reportWebVitals } from "./reportWebVitals";
+import { mockServer } from "./server";
 // main
 if (process.env.NODE_ENV === "development") {
   mockServer({ environment: "development" });

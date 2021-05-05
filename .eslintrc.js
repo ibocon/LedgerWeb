@@ -26,6 +26,14 @@ module.exports = {
     // jsx 파일과 tsx 파일에서 JSX 문법을 사용할 수 있도록 한다.
     // https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/jsx-filename-extension.md
     'react/jsx-filename-extension': [1, { extensions: ['.jsx', '.tsx'] }],
+    // 경로에 js, jsx, ts, tsx 확장자를 적지 않아도 되도록 한다.
+    'import/extensions': [
+      'error',
+      'ignorePackages',
+      {
+        'js': 'never', 'jsx': 'never', 'ts': 'never', 'tsx': 'never',
+      }
+    ],
   },
   settings: {
     'import/resolver': {
@@ -34,12 +42,5 @@ module.exports = {
       },
       typescript: {}, // tsconfig.json 을 eslint 로 로드한다.
     },
-    'import/extensions': [
-      'error',
-      'ignorePackages',
-      {
-        'js': 'never', 'jsx': 'never', 'ts': 'never', 'tsx': 'never',
-      }
-    ] 
   }
 };

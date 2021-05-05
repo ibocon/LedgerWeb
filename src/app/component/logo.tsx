@@ -16,7 +16,7 @@ type LogoProps = {
   height: number | string;
 }
 // component
-export const Logo : React.FC<LogoProps> = (props) => {
+export const Logo : React.FunctionComponent<LogoProps> = (props) => {
 
   const history = useHistory();
   const onLogoClicked = () => {
