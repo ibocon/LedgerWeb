@@ -9,8 +9,8 @@ import {
   UploadOutlined,
 } from "@ant-design/icons";
 // source
-import { Logo } from "src/app/component";
-import { selectSidebarCollapsed } from "src/app/feature/interfaceFeature";
+import { Logo } from "../component";
+import { selectSidebarCollapsed } from "../feature/interfaceFeature";
 // style
 const StyledMenu = styled(Menu.Item)`
   font-size: 16px;
@@ -45,7 +45,7 @@ export function Sider(props: {}) {
           textAlign: logoAlign,
         }}
       >
-        <Logo width={logoWidth} />
+        <Logo width={logoWidth} height="60px" />
       </div>
       <Menu theme="dark" mode="inline" defaultSelectedKeys={["1"]}>
         <StyledMenu key="1" icon={<UserOutlined />}>

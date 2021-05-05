@@ -7,7 +7,7 @@ import { MenuUnfoldOutlined, MenuFoldOutlined } from "@ant-design/icons";
 import {
   selectSidebarCollapsed,
   switchSidebarCollapsed,
-} from "src/app/feature";
+} from "../feature";
 // style
 const menuStyle = css`
   font-size: 18px;

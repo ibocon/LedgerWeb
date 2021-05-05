@@ -12,15 +12,15 @@ import {
 } from "@ant-design/icons";
 // source
 import {
-  Logo,
   BreakPointType,
   Container,
   DecideBreakPoint,
   IsSmallBreakPoint,
-} from "src/app/component";
+} from "@ledger-component/styled";
 import { useSelector } from "react-redux";
-import { selectUserId } from "../feature";
 import * as ledger from "src/component";
+import { Logo } from '../component';
+import { selectUserId } from "../feature";
 // type
 enum MenuKey {
   ledger = "ledger",
@@ -76,7 +76,7 @@ export function IntroPage() {
   };
 
   const Menus = (
-    <React.Fragment>
+    <>
       <Menu.Item
         key={MenuKey.ledger}
         icon={<BookOutlined />}
@@ -98,7 +98,7 @@ export function IntroPage() {
       >
         Updates
       </Menu.Item>
-    </React.Fragment>
+    </>
   );
 
   return (
@@ -106,7 +106,7 @@ export function IntroPage() {
       <StyledHeader>
         <Container>
           <div style={{ float: "left", margin: "0px 24px 0px 0px" }}>
-            <Logo />
+            <Logo width='128px' height='60px' />
           </div>
           <Menu
             theme="dark"
@@ -122,14 +122,14 @@ export function IntroPage() {
             )}
             {BreakPointType.Medium <= breakWidth && Menus}
             {userId == null ? (
-              <React.Fragment>
+              <>
                 <Menu.Item style={{ float: "right" }}>
                   <Link to="/user/login">Login</Link>
                 </Menu.Item>
                 <Menu.Item style={{ float: "right" }}>
                   <Link to="/user/signup">Signup</Link>
                 </Menu.Item>
-              </React.Fragment>
+              </>
             ) : (
               <Menu.Item style={{ float: "right" }}>
                 <Link to="/board">Board</Link>

@@ -13,8 +13,8 @@ import {
   notify,
   selectNotification,
   selectUserId,
-} from "src/app/feature";
-import { isUserModel, isFail } from "src/app/component";
+} from "../feature";
+import { isUserModel, isFail } from "@ledger-component/type";
 // component
 export function Signup() {
   const history = useHistory();

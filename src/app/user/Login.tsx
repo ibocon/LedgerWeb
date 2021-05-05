@@ -12,8 +12,8 @@ import {
   selectNotification,
   notify,
   selectUserId,
-} from "src/app/feature";
-import { isFail, isUserModel } from "src/app/component";
+} from "../feature";
+import { isFail, isUserModel } from "@ledger-component/type";
 import { Container, Logo, Header, Navigator, Label } from "./component";
 // component
 export function Login() {

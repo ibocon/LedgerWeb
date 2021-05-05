@@ -3,7 +3,7 @@ import React from "react";
 import { Layout } from "antd";
 import styled from "styled-components";
 // source
-import { BreakPointType } from "src/app/component";
+import { BreakPointType } from "@ledger-component/styled";
 import { Header } from "./Header";
 import { Sider } from "./Sider";
 import { AddRecordMenu } from "./AddRecordMenu";

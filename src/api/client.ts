@@ -1,7 +1,7 @@
 // module
 import axios from "axios";
 // source
-import { isFail } from "src/app/component";
+import { isFail } from "@ledger-component/type";
 // common
 export interface FailResponse {
   data: Fail;

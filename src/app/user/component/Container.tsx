@@ -3,7 +3,7 @@ import React from "react";
 import styled from "styled-components";
 import { Layout } from "antd";
 // source
-import { BreakPointType } from "src/app/component";
+import { BreakPointType } from "@ledger-component/styled";
 // style
 const StyledLayout = styled(Layout)`
   // layout

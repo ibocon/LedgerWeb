@@ -3,8 +3,8 @@ import React from "react";
 import styled from "styled-components";
 import { Layout, Button } from "antd";
 // source
+import { logout, useAppDispatch } from "@ledger-app/feature";
 import { SiderCollapseButton } from "./SiderCollapseButton";
-import { logout, useAppDispatch } from "src/app/feature";
 // style
 const StyledHeader = styled(Layout.Header)`
   padding: 0;

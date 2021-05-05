@@ -24,7 +24,9 @@
     "baseUrl": ".", // 상대 경로의 base 폴더를 정한다. '.' 는 tsconfig.json 가 있는 폴더다.
     "paths": {
       // 상대 경로 중 축약 표현할 경로 리스트다.
-      "src/*": ["src/*"]
+      "@ledger-component/*" : ["src/component/*"],
+      "@ledger-api/*" : ["src/api/*"],
+      "@ledger-app/*" : ["src/app/*"],
     },
     "moduleResolution": "Node", // 'Classic' 는 Backward Compatibility
     "esModuleInterop": true, // ES6 Module 과 CommonJS 모듈 차이로 발생하는 문제를 해결한다.

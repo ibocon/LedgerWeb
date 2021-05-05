@@ -3,7 +3,7 @@ import React from "react";
 import { Redirect, Route, Switch } from "react-router-dom";
 import { Layout } from "antd";
 // source
-import { PrivateRoute } from "src/app/component";
+import { PrivateRoute } from "./component";
 import { IntroPage } from "./intro";
 import { BoardPage } from "./board";
 import { UserPage } from "./user";

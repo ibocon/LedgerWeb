@@ -5,7 +5,7 @@ import { unwrapResult } from "@reduxjs/toolkit";
 import { Route, Redirect, RouteProps, useHistory } from "react-router-dom";
 // source
 import { useAppDispatch, getUser, selectUserId, notify } from "src/app/feature";
-import { isFail } from "./type";
+import { isFail } from "@ledger-component/type";
 // component
 export const PrivateRoute = ({ children, ...rest }: RouteProps) => {
   const history = useHistory();

@@ -6,7 +6,7 @@ import {
 } from "@reduxjs/toolkit";
 import { UserService } from "src/api/user";
 // source
-import { isUserModel } from "src/app/component";
+import { isUserModel } from "@ledger-component/type";
 import { RootState } from "./rootFeature";
 // type
 const name: string = "user";

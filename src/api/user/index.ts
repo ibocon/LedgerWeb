@@ -1,8 +1,8 @@
 // module
 import axios from "axios";
 // source
-import client, { FailResponse, isFailResponse } from "src/api/client";
-import token from "src/api/token";
+import client, { FailResponse, isFailResponse } from "../client";
+import token from "../token";
 import { signup } from "./signup";
 import { login } from "./signin";
 interface UserResponse {
