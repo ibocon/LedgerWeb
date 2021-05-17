@@ -34,6 +34,9 @@ module.exports = {
         'js': 'never', 'jsx': 'never', 'ts': 'never', 'tsx': 'never',
       }
     ],
+    // react/prop-types 와 typescript-eslint를 같이 사용하면 타입을 추측할 때 충돌하므로 react/prop-types 를 off 한다.
+    // https://github.com/yannickcr/eslint-plugin-react/issues/2353
+    'react/prop-types': 'off',
   },
   settings: {
     'import/resolver': {
