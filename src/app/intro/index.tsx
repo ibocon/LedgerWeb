@@ -158,9 +158,17 @@ export function IntroPage() {
               <p>Ledger update 에 대한 소개</p>
             </div>
           )}
-          <ledger.Button size="small">small</ledger.Button>
-          <ledger.Button size="middle">middle</ledger.Button>
-          <ledger.Button size="large">large</ledger.Button>
+          <div>
+            <ledger.Button size="small">small</ledger.Button>
+            <ledger.Button size="middle">middle</ledger.Button>
+            <ledger.Button size="large">large</ledger.Button>
+          </div>
+          <div>
+            <ledger.Button shape='rectangle'>rectangle</ledger.Button>
+            <ledger.Button shape='round'>round</ledger.Button>
+            <ledger.Button shape='circle'>circle</ledger.Button>
+            <ledger.Button size='large' shape='circle'>circle</ledger.Button>
+          </div>
         </Container>
       </StyledContent>
     </Layout>

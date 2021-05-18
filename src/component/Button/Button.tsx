@@ -20,17 +20,24 @@ import style from './Button.scss';
 // type
 import { ButtonProps } from './ButtonProps';
 // component
-export const Button: React.FunctionComponent<ButtonProps> = forwardRef<HTMLButtonElement, ButtonProps>(
-  (props, ref) => {
-  const { children = undefined, size = 'middle' } = props;
+export const Button: React.FunctionComponent<ButtonProps> = forwardRef<HTMLButtonElement, ButtonProps>((props, ref) => {
+  // Destructuring 으로 Button 에게 전달된 props 를 변수에 할당하면서 기본값도 결정한다. 
+  const { 
+    children = undefined, 
+    size = 'middle',
+    shape = 'rectangle',
+  } = props;
 
   const className = classNames(style.base, {
     [`${style.small}`]: size === 'small',
     [`${style.large}`]: size === 'large',
+  }, {
+    [`${style.round}`]: shape === 'round',
+    [`${style.circle}`]: shape === 'circle',
   });
 
   return (
-    <button className={className} type='button' ref={ref}>
+    <button type='button' ref={ref} className={className}>
       {children}
     </button>
   );

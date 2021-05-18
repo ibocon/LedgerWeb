@@ -14,11 +14,13 @@
 
 import React from "react";
 
-type ButtonSizeType = 'small' | 'middle' | 'large' | undefined;
+type ButtonShapeType = 'rectangle' | 'round' | 'circle';
+type ButtonSizeType = 'small' | 'middle' | 'large';
 
 export interface ButtonProps {
-    children: React.ReactNode;
-    size: ButtonSizeType;
+    children?: React.ReactNode;
+    size?: ButtonSizeType;
+    shape?: ButtonShapeType;
 }
 
 export default ButtonProps;

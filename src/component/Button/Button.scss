@@ -1,3 +1,17 @@
+/*
+ * All Rights Reserved
+ * Copyright (c) 2021 Yegun Kim
+ * Created by Yegun Kim (wlfka102@gmail.com)
+ * 
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+ * THE SOFTWARE.
+ */
+
 ////
 /// `Button` 컴포넌트 스타일 모듈입니다.
 /// @author Yegun Kim
@@ -6,6 +20,9 @@
 @use "~/src/style" as style;
 
 /* 1. variable */
+$height-base: 32px;
+$height-small: 24px;
+$height-large: 40px;
 
 /* 1.1. layout */
 $padding-x-base: 0.95rem !default;
@@ -81,6 +98,11 @@ $line-height: style.$variable-line-height-base !default;
 /* 3. selector */
 $prefix-base: #{style.$variable-prefix-root}-button;
 .#{$prefix-base} {
+  // SASS 의 interpolation 기능을 활용해서 base 클래스에 접근할 수 있는 변수를 만든다.
+  // base 클래스의 하위 클래스는 변수로 base 클래스를 확장할 수 있다.
+  // https://sass-lang.com/documentation/interpolation
+  $class-base: &;
+  
   position: initial;
   display: inline-block;
   vertical-align: middle;
@@ -130,10 +152,54 @@ $prefix-base: #{style.$variable-prefix-root}-button;
       $border-radius-large
     );
   }
+  /* shape */
+// .btn-circle(@btnClassName: btn) {
+// min-width: @btn-height-base;
+// padding-right: 0;
+// padding-left: 0;
+// text-align: center;
+// border-radius: 50%;
+//   &.@{btnClassName}-lg {
+//     min-width: @btn-height-lg;
+//     border-radius: 50%;
+//   }
+//   &.@{btnClassName}-sm {
+//     min-width: @btn-height-sm;
+//     border-radius: 50%;
+//   }
+// }
+
+  &__round {
+
+  }
+
+  &__circle {
+    // min-width: $height-base;
+    padding-left: 0px;
+    padding-right: 0px;
+    text-align: center;
+    border-radius: 50%;
+
+    #{$class-base}__small {
+      min-width: $height-small;
+    }
+
+    #{$class-base}__large {
+      min-width: $height-large;
+    }
+  }
+
+//   &__circle &__large {
+//     min-width: $height-large;
+//   }
 }
 
 :export {
   base: $prefix-base;
+  // size
   small: #{$prefix-base}__small;
   large: #{$prefix-base}__large;
+  // shape
+  round: #{$prefix-base}__round;
+  circle: #{$prefix-base}__circle;
 }
