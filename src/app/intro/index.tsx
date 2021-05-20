@@ -166,8 +166,8 @@ export function IntroPage() {
           <div>
             <ledger.Button shape='rectangle'>rectangle</ledger.Button>
             <ledger.Button shape='round'>round</ledger.Button>
-            <ledger.Button shape='circle'>circle</ledger.Button>
-            <ledger.Button size='large' shape='circle'>circle</ledger.Button>
+            <ledger.Button shape='circle'>c</ledger.Button>
+            <ledger.Button size='large' shape='circle'>c</ledger.Button>
           </div>
         </Container>
       </StyledContent>

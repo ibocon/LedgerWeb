@@ -20,11 +20,12 @@
 @use "~/src/style" as style;
 
 /* 1. variable */
+
+/* 1.1. layout */
 $height-base: 32px;
 $height-small: 24px;
 $height-large: 40px;
 
-/* 1.1. layout */
 $padding-x-base: 0.95rem !default;
 $padding-x-small: 0.75rem !default;
 $padding-x-large: 1.25rem !default;
@@ -106,6 +107,8 @@ $prefix-base: #{style.$variable-prefix-root}-button;
   position: initial;
   display: inline-block;
   vertical-align: middle;
+  // button 의 높이는 다음 공식으로 산출되며, font-size 는 Bootstrap 의 rfs 라이브러리로 계산되어 주어진다.
+  // height = [(font-size * $padding-y-base) * 2] + ($border-width * 2) + (font-size * $line-height)
 
   outline: 0rem;
 
@@ -152,46 +155,30 @@ $prefix-base: #{style.$variable-prefix-root}-button;
       $border-radius-large
     );
   }
-  /* shape */
-// .btn-circle(@btnClassName: btn) {
-// min-width: @btn-height-base;
-// padding-right: 0;
-// padding-left: 0;
-// text-align: center;
-// border-radius: 50%;
-//   &.@{btnClassName}-lg {
-//     min-width: @btn-height-lg;
-//     border-radius: 50%;
-//   }
-//   &.@{btnClassName}-sm {
-//     min-width: @btn-height-sm;
-//     border-radius: 50%;
-//   }
-// }
 
-  &__round {
+//   &__round {
 
-  }
+//   }
 
   &__circle {
+    // 2021.05.20 TODO 여기서부터 작업하자.
+    // button 최소 버튼 높이만큼의 너비를 확보해야 텍스트가 찌그러지지 않도록 할 수 있다.
+    // Bootstrap 는 버튼이 circle 인 경우가 없기 때문에 자체 개발해야 한다.
+
     // min-width: $height-base;
     padding-left: 0px;
     padding-right: 0px;
     text-align: center;
     border-radius: 50%;
 
-    #{$class-base}__small {
-      min-width: $height-small;
-    }
+    // &#{$class-base}__small {
+    //   min-width: $height-small;
+    // }
 
-    #{$class-base}__large {
-      min-width: $height-large;
-    }
+    // &#{$class-base}__large {
+    //   min-width: $height-large;
+    // }
   }
-
-//   &__circle &__large {
-//     min-width: $height-large;
-//   }
 }
 
 :export {
