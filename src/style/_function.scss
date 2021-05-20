@@ -7,7 +7,7 @@
 @use "./variable/animation" as variable-animation;
 
 /// easing 함수로 만들어진 timing-function 을 반환합니다.
-/// @param {String} $function-name - easeing 함수 이름
+/// @parameter {Strings} $function-name - easeing 함수 이름
 /// @link https://css-tricks.com/snippets/sass/easing-map-get-function/ css-tricks 글을 참고해 개발했습니다.
 @function get-timing-function($function-name) {
   @if map-has-key(variable-animation.$easeing-functions, $function-name) {
@@ -20,4 +20,83 @@
 
   @warn "get-timing-function 함수로 요청한 '#{$function-name}' 은 아직 존재하지 않는 timing-function 입니다.";
   @return ease;
+}
+
+/// 단위를 제거한다.
+/// @parameter {Numbers} $number - 단위를 제거할 수
+/// @return {Numbers} 단위가 제거된 수
+/// @link https://css-tricks.com/snippets/sass/strip-unit-function/
+@function strip-unit($number) {
+  @if type-of($number) == 'number' and not unitless($number) {
+    @return $number / ($number * 0 + 1);
+  }
+
+  @return $number;
+}
+
+/// string 을 number 로 변환한다.
+/// @parameter {Strings} $string - number 로 변환할 string
+/// @return {Numbers} string 에서 계산한 number
+/// @link https://kittygiraudel.com/2014/01/15/casting-a-string-to-a-number-in-sass/
+@function number($string) {
+
+  $strings: '0' '1' '2' '3' '4' '5' '6' '7' '8' '9';
+  $numbers: 0 1 2 3 4 5 6 7 8 9;
+
+  $result: 0;
+  $minus: false;
+  $divider: 0;
+
+  // string 의 char 을 하나씩 확인하며 반환할 숫자를 만든다.
+  @for $i from 1 through str-length($string) {
+    $character: str-slice($string, $i, $i);
+
+    @if $character == '-' {
+      $minus: true;
+    } @else if $character == '.' {
+      // 소수가 시작되므로, divider 을 1 로 초기화한다.
+      $divider: 1;
+    } @else {
+      $index: index($strings, $character);
+
+      // char 가 수가 아니라면 단위로 판단한다.
+      @if not $index {
+        $result: if($minus, $result * -1, $result);
+        $unit: unit(str-slice($string, $i));
+        @return $result * $unit;
+      }
+
+      $number: nth($numbers, $index);
+      
+      @if $divider == 0 {
+        // 10 을 곱해서 자리 수를 높인다.
+        $result: $result * 10;
+      } @else {
+        // divider 을 활용해 소수로 만든다. 
+        $divider: $divider * 10;
+        $number: $number / $divider;
+      }
+
+      $result: $result + $number;
+    }
+  }
+
+  // 음수였을 경우 -1 을 곱해서 반환한다.
+  @return if($minus, $result * -1, $result);
+}
+
+/// unit string 을 unit number 로 변환한다.
+/// @parameter {Strings} $string - unit string
+/// @return {Numbers} unit number
+@function unit($string) {
+  $strings: 'px' 'cm' 'mm' '%' 'ch' 'pica' 'in' 'em' 'rem' 'pt' 'pc' 'ex' 'vw' 'vh' 'vmin' 'vmax';
+  $units: 1px 1cm 1mm 1% 1ch 1pica 1in 1em 1rem 1pt 1pc 1ex 1vw 1vh 1vmin 1vmax;
+  $index: index($strings, $string);
+
+  @if not $index {
+    @warn "Unknown unit `#{$string}`.";
+    @return false;
+  }
+
+  @return nth($units, $index);
 }
