@@ -14,7 +14,7 @@
 
 import React from "react";
 
-type ButtonShapeType = 'rectangle' | 'round' | 'circle';
+type ButtonShapeType = 'rectangle' | 'circle';
 type ButtonSizeType = 'small' | 'middle' | 'large';
 
 export interface ButtonProps {

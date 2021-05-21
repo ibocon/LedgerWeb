@@ -117,8 +117,8 @@ $prefix-base: #{style.$variable-prefix-root}-button;
   display: inline-block;
   vertical-align: middle;
 
-  // button 의 높이는 다음 공식으로 산출되며, font-size 는 Bootstrap 의 rfs 라이브러리로 계산되어 주어진다.
-  // height = [(font-size * $padding-y-base) * 2] + ($border-width * 2) + (font-size * $line-height-base)
+  // button 의 높이는 다음 공식으로 산출되며, font-size 는 Bootstrap 의 rfs 라이브러리로 계산한다.
+  // height = [(폰트 크기 * padding 비율) * 2] + (border 크기 * 2) + (폰트 크기 * 줄 높이 비율)
 
   outline: 0rem;
 
@@ -166,10 +166,6 @@ $prefix-base: #{style.$variable-prefix-root}-button;
     );
   }
 
-//   &__round {
-
-//   }
-
   &__circle {
 
     padding-left: 0px;
@@ -195,6 +191,5 @@ $prefix-base: #{style.$variable-prefix-root}-button;
   small: #{$prefix-base}__small;
   large: #{$prefix-base}__large;
   // shape
-  round: #{$prefix-base}__round;
   circle: #{$prefix-base}__circle;
 }

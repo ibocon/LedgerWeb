@@ -32,7 +32,6 @@ export const Button: React.FunctionComponent<ButtonProps> = forwardRef<HTMLButto
     [`${style.small}`]: size === 'small',
     [`${style.large}`]: size === 'large',
   }, {
-    [`${style.round}`]: shape === 'round',
     [`${style.circle}`]: shape === 'circle',
   });
 
