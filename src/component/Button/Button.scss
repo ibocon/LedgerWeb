@@ -22,17 +22,13 @@
 /* 1. variable */
 
 /* 1.1. layout */
-$height-base: 32px;
-$height-small: 24px;
-$height-large: 40px;
-
 $padding-x-base: 0.95rem !default;
 $padding-x-small: 0.75rem !default;
 $padding-x-large: 1.25rem !default;
 
 $padding-y-base: 0.25rem !default;
-$padding-y-small: 0.15rem !default;
-$padding-y-large: 0.35rem !default;
+$padding-y-small: 0.21875rem !default;
+$padding-y-large: 0.3125rem !default;
 
 $border-width-base: style.$variable-border-width-base !default;
 $border-style-base: style.$variable-border-style-base !default;
@@ -98,7 +94,7 @@ $line-height-base: style.$variable-line-height-base !default;
 
 @mixin calc-circle-min-width($font-size) {
   // button 버튼 높이만큼 최소한 너비를 확보해야 텍스트가 찌그러지지 않도록 할 수 있다.
-  // height = [(폰트 크기 * padding 비율) * 2] + (border 크기 * 2) + (폰트 크기 * 줄 높이)
+  // height = [(폰트 크기 * padding 비율) * 2] + (border 크기 * 2) + (폰트 크기 * 줄 높이 비율)
   $font-size: style.function-strip-unit(style.function-number(style.vendor-rfs-fluid-value($font-size)));
 
   $padding-y : $font-size * style.function-strip-unit($padding-y-base);
