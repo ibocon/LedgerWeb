@@ -112,8 +112,8 @@ $prefix-base: #{style.$variable-prefix-root}-button;
   // base 클래스의 하위 클래스는 변수로 base 클래스를 확장할 수 있다.
   // https://sass-lang.com/documentation/interpolation
   $class-base: &;
-  
-  position: initial;
+
+  position: relative;
   display: inline-block;
   vertical-align: middle;
 
@@ -133,6 +133,7 @@ $prefix-base: #{style.$variable-prefix-root}-button;
 
   cursor: pointer;
   user-select: none;
+  overflow: hidden;
 
   @include size(
     $padding-x-base,
@@ -183,10 +184,34 @@ $prefix-base: #{style.$variable-prefix-root}-button;
       @include calc-circle-min-width($font-size-large);
     }
   }
+
+  &--ripple {
+    position: absolute;
+    display: block;
+
+    width: 1rem;
+    height: 1rem;
+    border-radius: 100%;
+
+    background: hsla(0, 100%, 0%, 0.1);
+    opacity: 1;
+
+    animation: 1s ease rippling;
+
+    @keyframes rippling {
+      to {
+        transform: scale(50);
+        opacity: 0;
+      }
+    }
+
+  }
 }
 
 :export {
-  base: $prefix-base;
+  base: #{$prefix-base};
+  // ripple
+  ripple: #{$prefix-base}--ripple;
   // size
   small: #{$prefix-base}__small;
   large: #{$prefix-base}__large;

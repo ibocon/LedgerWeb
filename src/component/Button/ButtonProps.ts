@@ -21,6 +21,7 @@ export interface ButtonProps {
     children?: React.ReactNode;
     size?: ButtonSizeType;
     shape?: ButtonShapeType;
+    onClick?: React.MouseEventHandler<HTMLElement>;
 }
 
 export default ButtonProps;
